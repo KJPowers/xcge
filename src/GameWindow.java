@@ -17,11 +17,23 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.stupidiville.games.Card;
-import org.stupidiville.games.Deck;
+import org.stupidiville.games.cards.Card;
+import org.stupidiville.games.cards.Deck;
 
 public class GameWindow extends JFrame
 {
+  private enum Action
+  {
+    SHOW_MAIN_MENU,
+    START_NEW_GAME,
+    FIND_A_GAME,
+    VIEW_FRIENDS,
+    START_SERVER,
+    CREATE_GAME,
+    
+    QUIT
+  }
+  
   JLabel m_lblDeck;
   JLabel m_lblDeal;
   Deck m_deck;
@@ -33,9 +45,35 @@ public class GameWindow extends JFrame
     this.setBounds(50, 50, 810, 510);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     
+    initialize();
     addMenus();
     
-    m_lblDeck = new JLabel();
+    Action doThis = Action.SHOW_MAIN_MENU;
+    while(doThis != Action.QUIT)
+    {
+      switch(doThis)
+      {
+        case SHOW_MAIN_MENU:
+          break;
+        case START_NEW_GAME:
+          break;
+        case FIND_A_GAME:
+          break;
+        case VIEW_FRIENDS:
+          break;
+        case START_SERVER:
+          break;
+        case CREATE_GAME:
+          break;
+        default:
+          // Show error log
+          break;
+      }
+      
+      doThis = showMainMenu();
+    }
+    // Old shit
+    /*m_lblDeck = new JLabel();
     m_lblDeck.setText("");
     m_lblDeck.setBounds(5, 5, 71, 96);
     this.getContentPane().add(m_lblDeck);
@@ -45,8 +83,16 @@ public class GameWindow extends JFrame
     m_lblDeal.setBounds(81, 5, 71, 96);
     this.getContentPane().add(m_lblDeal);
     
-    this.setVisible(true);
+    this.setVisible(true);*/
   }
+  
+  private Action showMainMenu()
+  {
+    return Action.QUIT;
+  }
+  
+  private void initialize()
+  {}
   
   public void showCard(Card p_card)
   {
