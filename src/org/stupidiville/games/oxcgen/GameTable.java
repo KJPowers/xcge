@@ -18,6 +18,7 @@ public class GameTable
   public void prepare()
   {
     //m_oRules.
+    
   }
   
   // Getters
