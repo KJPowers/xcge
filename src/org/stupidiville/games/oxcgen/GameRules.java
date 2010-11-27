@@ -1,6 +1,9 @@
 package org.stupidiville.games.oxcgen;
 
-public class GameRules
+import java.util.HashMap;
+import java.util.Iterator;
+
+public class GameRules extends Iterator
 {
   public enum Asdf
   {
@@ -20,10 +23,16 @@ public class GameRules
   int m_iMaxPlayers = -1;
   int m_iTeamSize = -1;
   String m_sName = "";
+  HashMap<String, GameRule> m_hmRules;
   
   public GameRules()
   {
     
+  }
+  
+  public Iterator<GameRule> iterator()
+  {
+	
   }
   
   // Getters
