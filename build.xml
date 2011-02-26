@@ -31,8 +31,8 @@
     <!-- Create the distribution directory -->
     <mkdir dir="${dist}/bin"/>
 
-    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/bin/OX_C_GEN.jar"
+    <!-- Put everything in ${build} into the OxCGen.jar file -->
+    <jar jarfile="${dist}/bin/OxCGen.jar"
 	     basedir="${bin}"
     	 manifest="${src}/manifest"
 		 includes="**"/>
@@ -47,8 +47,8 @@
   
   <target name="run"
         description="run the project" >
-	<java classname="OX_C_GEN"
-          classpath="${dist}/bin/OX_C_GEN.jar"
+	<java classname="Standalone"
+          classpath="${dist}/bin/OxCGen.jar"
 	      fork="true" />
   </target>
 </project>

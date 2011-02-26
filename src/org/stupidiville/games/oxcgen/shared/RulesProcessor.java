@@ -1,4 +1,4 @@
-package org.stupidiville.games.oxcgen;
+package org.stupidiville.games.oxcgen.shared;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,13 +9,15 @@ import java.util.Iterator;
  * @author Keith Powers
  *
  */
-public class GameTable
+public class RulesProcessor
 {
-  GameRules m_oRules = null;
-  ArrayList<Player> m_alPlayers;
-  int m_iNumSeats = 0;
+  // The rules processing engine, this contains the rules of the game being played at this table
+    // MVC Role: Controller
+  GameRulesProcessor m_oTheRules;
+  // The seats (player API)
+  ArrayList<Player> m_alSeats;
   
-  GameTable(final GameRules p_oRules)
+  RulesProcessor(final Rules p_oRules)
   {
     setRules(p_oRules);
   }
@@ -28,10 +30,10 @@ public class GameTable
   
   public void processRules()
   {
-	Iterator<GameRule> iterRules = m_oRules.iterator();
+	Iterator<Rule> iterRules = m_oRules.iterator();
 	while(iterRules.hasNext())
 	{
-      GameRule currentStep = iterRules.next();
+      Rule currentStep = iterRules.next();
       switch(currentStep.getStepType())
       {
         case BID:
@@ -48,13 +50,13 @@ public class GameTable
   
   // Getters & setters
   public ArrayList <Player> getPlayers() { return m_alPlayers; }  
-  public GameRules getRules() { return m_oRules; }
+  public Rules getRules() { return m_oRules; }
   
-  public void setPlayers(ArrayList<Player> p_alPlayers)
-  { m_alPlayers = p_alPlayers;
+  public void setSeats(ArrayList<Player> p_alSeats)
+  { m_alSeats = p_alSeats;
   }
   
-  public void setRules(GameRules p_oNewRules)
+  public void setRules(Rules p_oNewRules)
   { m_oRules = p_oNewRules;
-  }
+  } 
 }

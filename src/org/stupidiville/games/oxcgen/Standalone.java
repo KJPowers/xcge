@@ -1,4 +1,5 @@
-public class OX_C_GEN
+package org.stupidiville.games.oxcgen;
+public class Standalone
 {
   /**
    * @param args
