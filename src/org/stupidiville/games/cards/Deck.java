@@ -11,9 +11,9 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class Deck
+public class Deck implements Iterator<Card>
 {
-  public enum Type {STD, STANDARD, STD_JOKERS, STANDARD_WITH_JOKERS, PINOCLE}
+  public enum Type {STANDARD52, STANDARD54, PINOCHLE}
   
   private int m_iJoker = 0;
   private ArrayList<Icon> m_cardIcons;
@@ -28,7 +28,7 @@ public class Deck
   
   public Deck()
   {
-    this(Type.STD);
+    this(Type.STANDARD52);
   }
   
   public Deck(Type p_deckType)
@@ -39,8 +39,7 @@ public class Deck
     
     switch(p_deckType)
     {
-      case STANDARD_WITH_JOKERS:
-      case STD_JOKERS:
+      case STANDARD54:
         m_cards = new ArrayList<Card>(54);
         m_cards.add(new Card(getIcon(null, Card.Value.JOKER), m_backIcon));
         for(Card.Suit suit : Card.Suit.values())
@@ -56,7 +55,7 @@ public class Deck
         m_cards.add(new Card(getIcon(null, Card.Value.JOKER), m_backIcon));
         break;
         
-      case PINOCLE:
+      case PINOCHLE:
         m_cards = new ArrayList<Card>(48);
         for(Card.Suit suit : Card.Suit.values())
         {
@@ -79,8 +78,7 @@ public class Deck
         }
         break;
         
-      case STANDARD:
-      case STD:
+      case STANDARD52:
       default:
         m_cards = new ArrayList<Card>(52);
         for(Card.Suit suit : Card.Suit.values())
@@ -115,11 +113,13 @@ public class Deck
     m_iter = m_cards.iterator();
   }
   
-  public Boolean hasNext()
+  @Override
+  public boolean hasNext()
   {
     return m_iter.hasNext();
   }
   
+  @Override
   public Card next()
   {
     return m_iter.next();
@@ -198,5 +198,11 @@ public class Deck
     {
       System.out.println(ex.getMessage());
     }
+  }
+
+  @Override
+  public void remove() {
+    // TODO Auto-generated method stub
+    
   }
 }
