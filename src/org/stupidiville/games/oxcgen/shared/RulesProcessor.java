@@ -13,7 +13,7 @@ public class RulesProcessor
 {
   // The rules processing engine, this contains the rules of the game being played at this table
     // MVC Role: Controller
-  Rules m_oRules;
+  GameRulesProcessor m_oTheRules;
   // The seats (player API)
   ArrayList<Player> m_alSeats;
   
@@ -30,26 +30,26 @@ public class RulesProcessor
   
   public void processRules()
   {
-	  /*Iterator<Rule> iterRules = m_oRules.iterator();
-  	while(iterRules.hasNext())
-  	{
-        Rule currentStep = iterRules.next();
-        switch(currentStep.getStepType())
-        {
-          case BID:
-            break;
-          case TRICK:
-            break;
-          case DEAL:
-            break;
-          default:
-            break;
-        }
-  	}*/
+	Iterator<Rule> iterRules = m_oRules.iterator();
+	while(iterRules.hasNext())
+	{
+      Rule currentStep = iterRules.next();
+      switch(currentStep.getStepType())
+      {
+        case BID:
+          break;
+        case TRICK:
+          break;
+        case DEAL:
+          break;
+        default:
+          break;
+      }
+	}
   }
   
   // Getters & setters
-  //public ArrayList <Player> getPlayers() { return m_alPlayers; }  
+  public ArrayList <Player> getPlayers() { return m_alPlayers; }  
   public Rules getRules() { return m_oRules; }
   
   public void setSeats(ArrayList<Player> p_alSeats)

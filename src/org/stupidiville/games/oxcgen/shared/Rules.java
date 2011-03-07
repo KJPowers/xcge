@@ -3,15 +3,7 @@ package org.stupidiville.games.oxcgen.shared;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.xerces.parsers.DOMParser;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-public class Rules implements Iterator
+public class Rules extends Iterator
 {
   public enum Asdf
   {
@@ -31,23 +23,16 @@ public class Rules implements Iterator
   int m_iMaxPlayers = -1;
   int m_iTeamSize = -1;
   String m_sName = "";
-  //HashMap<String, Rule> m_hmRules;
-  protected DOMParser parser;
+  HashMap<String, Rule> m_hmRules;
   
   public Rules()
   {
-    parser = new DOMParser();
-    Document document = null;//new Document();
+    
   }
   
-  /*public Iterator iterator()
+  public Iterator<Rule> iterator()
   {
-    
-  }*/
-  
-  public void readRulesFromFile(final String p_sFileName) 
-  {
-    parser.flub(bar);
+	
   }
   
   // Getters
@@ -72,26 +57,5 @@ public class Rules implements Iterator
   }
   public void setName (final String p_sName)
   { m_sName = p_sName;
-  }
-
-  @Override
-  public boolean hasNext()
-  {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public Object next()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public void remove()
-  {
-    // TODO Auto-generated method stub
-    
   }
 }
