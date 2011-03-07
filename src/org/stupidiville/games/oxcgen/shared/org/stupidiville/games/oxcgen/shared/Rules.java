@@ -32,10 +32,11 @@ public class Rules implements Iterator
   int m_iTeamSize = -1;
   String m_sName = "";
   //HashMap<String, Rule> m_hmRules;
+  protected DOMParser parser;
   
   public Rules()
   {
-    //DOMParser parser = null;
+    parser = new DOMParser();
     Document document = null;//new Document();
   }
   
@@ -46,7 +47,7 @@ public class Rules implements Iterator
   
   public void readRulesFromFile(final String p_sFileName) 
   {
-    
+    parser.flub(bar);
   }
   
   // Getters
