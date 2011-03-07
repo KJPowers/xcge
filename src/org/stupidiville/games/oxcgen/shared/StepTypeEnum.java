@@ -1,4 +1,4 @@
-package org.stupidiville.games.oxcgen;
+package org.stupidiville.games.oxcgen.shared;
 
 public enum StepTypeEnum
 {
