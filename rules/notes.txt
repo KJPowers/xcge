@@ -1,0 +1,26 @@
+glossary
+
+n.
+card
+deck
+game
+trick
+turn
+hand
+stack
+pile
+score
+face up/down
+ranking system
+trump
+dealer
+deal
+
+v.
+shuffle
+bid
+draw
+filp
+discard
+sit in
+

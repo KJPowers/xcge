@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<game name="Killer Solitaire"
+      minPlayers="2">
+  <setup>
+    <deck type="standard 52"/>
+    <layout />
+  </setup>
+</game>

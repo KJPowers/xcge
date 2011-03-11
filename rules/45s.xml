@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<game name="45s">
-  <a />
+<game name="45s"
+      minPlayers="2"
+      maxPlayers="6"
+      teams="optional"
+      dealerDirection="clockwise">
+  <setup>
+    <deck type="standard 52"/>
+    
+  </setup>
+  <hand>
+    <shuffle deck=""/>
+    <deal number="5"
+          to="players"
+          direction="clockwise"
+          startingWith="dealersLeft"/>
+    <deal number="3"
+          to="$P{bid winner}"/>
+  </hand>
 </game>

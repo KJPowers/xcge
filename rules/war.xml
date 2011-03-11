@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <game name="War"
       minPlayers="2">
-  <goal>
+  <setup>
+    <deck type="standard 52"/>
+    <layout />
+  </setup>
+  
+  <hand>
+    <trick startingWith="lastTrickWinner, dealersLeft"
+           numCards="1"
+           face="up">
+      <win condition="">
+        
+      </win>
+      <tie condition="">
+        <deal >
+      </tie>
+    </trick>
+    <winner condition=""/>
+  </hand>
 </game>
