@@ -33,22 +33,24 @@
 
     <!-- Put everything in ${build} into the OxCGen.jar file -->
     <jar jarfile="${dist}/bin/OxCGen.jar"
-	     basedir="${bin}"
-    	 manifest="${src}/manifest"
-		 includes="**"/>
+	       basedir="${bin}"
+    	   manifest="${src}/manifest"
+		     includes="**"/>
   </target>
 
   <target name="clean"
-        description="clean up" >
+          description="clean up" >
     <!-- Delete the ${build} and ${dist} directory trees -->
   	<delete dir="${bin}"/>
   	<delete dir="${dist}"/>
   </target>
   
-  <target name="run"
-        description="run the project" >
-	<java classname="Standalone"
+  <target name="runTest"
+          description="run the tests" >
+	  <java classname="Testing"
           classpath="${dist}/bin/OxCGen.jar"
-	      fork="true" />
+	        fork="true">
+      <arg value="rules/war.xml" />
+	  </java>
   </target>
 </project>

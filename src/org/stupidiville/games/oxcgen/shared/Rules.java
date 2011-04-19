@@ -1,16 +1,21 @@
 package org.stupidiville.games.oxcgen.shared;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.xerces.parsers.DOMParser;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.Text;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 public class Rules implements Iterator
 {
@@ -27,26 +32,79 @@ public class Rules implements Iterator
     DT_PINOCHLE
   }
   
-  boolean m_bDoublesAllowed;
-  int m_iMinPlayers = -1;
-  int m_iMaxPlayers = -1;
-  int m_iTeamSize = -1;
-  String m_sName = "";
-  //HashMap<String, Rule> m_hmRules;
-  protected DOMParser parser;
+  protected boolean m_bDoublesAllowed;
+  protected int m_iMinPlayers = -1;
+  protected int m_iMaxPlayers = -1;
+  protected int m_iTeamSize = -1;
+  protected String m_sName = "";
+  private String m_strRuleFile;
+  private Document m_doc;
   
   public Rules()
+  { }
+  
+  public void readRulesFromFile(final String p_sFileName) throws FileNotFoundException 
   {
-    parser = new DOMParser();
-    Document document = null;//new Document();
+    m_strRuleFile = p_sFileName;
+    parseXML();
+    parseDocument();
   }
   
-  /*public Iterator iterator()
+  private void parseXML()
   {
-    
-  }*/
+    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    try
+    {      
+      //Using factory get an instance of document builder
+      DocumentBuilder db = dbf.newDocumentBuilder();
+      
+      //parse using builder to get DOM representation of the XML file
+      m_doc = db.parse(m_strRuleFile);
+    } catch(ParserConfigurationException p_exp)
+    {
+      p_exp.printStackTrace();
+    } catch(SAXException p_exp)
+    {
+      p_exp.printStackTrace();
+    } catch(IOException p_exp)
+    {
+      p_exp.printStackTrace();
+    }
+  }
   
-  public void readRulesFromFile(final String p_sFileName) 
+  private void parseDocument()
+  {
+    Element eleRoot = getBasicGameInfo(); 
+    //get a nodelist of <employee> elements
+    NodeList nodesl = eleRoot.getChildNodes();
+    if(nodesl != null && nodesl.getLength() > 0)
+    {
+      for(int i = 0 ; i < nodesl.getLength();i++)
+      {        
+        //get the employee element
+        Element el = (Element)nodesl.item(i);
+      }
+    }
+  }
+  
+  private Element getBasicGameInfo()
+  {
+    final Element eleRoot = m_doc.getDocumentElement();
+    
+    NamedNodeMap nnm = eleRoot.getAttributes();
+    for(int i = 0; i < nnm.getLength(); i++)
+    {
+      Node node = nnm.item(i);
+      System.out.println(node.getLocalName());
+      
+    }
+    nnm.item(0);
+    
+    
+    return eleRoot;
+  }
+  
+  /*public void readRulesFromFileInputStream(final FileInputStream p_FIS)
   {
     try
     {
@@ -60,7 +118,7 @@ public class Rules implements Iterator
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-  }
+  }*/
   
   // Getters
   public boolean getDoublesAllowed() { return m_bDoublesAllowed; }
