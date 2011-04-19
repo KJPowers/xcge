@@ -24,7 +24,7 @@ public class Testing {
     Testing test = new Testing();
     for(String str : args)
     {
-      System.out.println(str);
+      System.out.println("--==Evaluating " + str + "==--");
       test.testParsing(str);
     }
   }

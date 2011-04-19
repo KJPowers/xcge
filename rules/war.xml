@@ -2,7 +2,7 @@
 <game name="War"
       minPlayers="2">
   <setup>
-    <deck type="standard 52"/>
+    <deck type="standard 52" />
     <layout />
   </setup>
   
@@ -14,9 +14,9 @@
         
       </win>
       <tie condition="">
-        <deal >
+        <deal />
       </tie>
     </trick>
-    <winner condition=""/>
+    <winner condition="" />
   </hand>
 </game>

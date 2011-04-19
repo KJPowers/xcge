@@ -74,32 +74,51 @@ public class Rules implements Iterator
   
   private void parseDocument()
   {
-    Element eleRoot = getBasicGameInfo(); 
-    //get a nodelist of <employee> elements
-    NodeList nodesl = eleRoot.getChildNodes();
-    if(nodesl != null && nodesl.getLength() > 0)
+    Element eleRoot = getBasicGameInfo();
+    printTree("", eleRoot);
+  }
+  
+  private void printTree(final String p_strPrefix, final Node p_element)
+  {
+    System.out.print(p_strPrefix + p_element.getNodeType() + ": " + p_element.getNodeName());
+    
+    // Attributes
+    NamedNodeMap nnm = p_element.getAttributes();
+    if(nnm != null && nnm.getLength() > 0)
     {
-      for(int i = 0 ; i < nodesl.getLength();i++)
-      {        
-        //get the employee element
-        Element el = (Element)nodesl.item(i);
+      System.out.print(" (");
+      for(int i = 0; i < nnm.getLength(); i++)
+      {
+        Node node = nnm.item(i);
+        if(i > 0) System.out.print(", ");
+        System.out.print(node.getNodeName() + "=" + node.getNodeValue());
       }
+      System.out.print(")");
+    }
+    System.out.println();
+    
+    //Child Elements
+    NodeList nodesl = p_element.getChildNodes();
+    for(int i = 0 ; i < nodesl.getLength();i++)
+    {
+      //get the employee element
+      Node node = nodesl.item(i);
+      printTree(p_strPrefix + ' ', node);
     }
   }
   
   private Element getBasicGameInfo()
   {
     final Element eleRoot = m_doc.getDocumentElement();
-    
+    System.out.print("root: " + eleRoot.getNodeName() + " (");
     NamedNodeMap nnm = eleRoot.getAttributes();
     for(int i = 0; i < nnm.getLength(); i++)
     {
       Node node = nnm.item(i);
-      System.out.println(node.getLocalName());
-      
-    }
-    nnm.item(0);
-    
+      if(i > 0) System.out.print(", ");
+      System.out.print(node.getNodeName() + "=" + node.getNodeValue());
+    }    
+    System.out.println(")");
     
     return eleRoot;
   }
