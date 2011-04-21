@@ -17,7 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Rules implements Iterator
+public class XMLRulesParser implements Iterator
 {
   public enum Asdf
   {
@@ -40,7 +40,7 @@ public class Rules implements Iterator
   private String m_strRuleFile;
   private Document m_doc;
   
-  public Rules()
+  public XMLRulesParser()
   { }
   
   public void readRulesFromFile(final String p_sFileName) throws FileNotFoundException 

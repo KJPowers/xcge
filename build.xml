@@ -17,13 +17,14 @@
   </target>
 
   <target name="compile" depends="init"
-        description="compile the source " >
+          description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}"
-    	   destdir="${bin}"
+           destdir="${bin}"
            target="1.5"
-  		   debug="true"
-    	   debuglevel="lines, vars, source"/>
+           debug="true"
+           debuglevel="lines, vars, source"
+           includeantruntime="false"/>
   </target>
 
   <target name="dist" depends="compile"
@@ -33,24 +34,24 @@
 
     <!-- Put everything in ${build} into the OxCGen.jar file -->
     <jar jarfile="${dist}/bin/OxCGen.jar"
-	       basedir="${bin}"
-    	   manifest="${src}/manifest"
-		     includes="**"/>
+         basedir="${bin}"
+         manifest="${src}/manifest"
+         includes="**"/>
   </target>
 
   <target name="clean"
           description="clean up" >
     <!-- Delete the ${build} and ${dist} directory trees -->
-  	<delete dir="${bin}"/>
-  	<delete dir="${dist}"/>
+    <delete dir="${bin}"/>
+    <delete dir="${dist}"/>
   </target>
   
   <target name="runTest"
           description="run the tests" >
-	  <java classname="Testing"
+    <java classname="Testing"
           classpath="${dist}/bin/OxCGen.jar"
-	        fork="true">
+          fork="true">
       <arg value="rules/war.xml" />
-	  </java>
+    </java>
   </target>
 </project>

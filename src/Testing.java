@@ -1,6 +1,6 @@
 import java.io.FileNotFoundException;
 import java.lang.String;
-import org.stupidiville.games.oxcgen.shared.Rules;
+import org.stupidiville.games.oxcgen.shared.XMLRulesParser;
 
 public class Testing {
   public Testing()
@@ -8,10 +8,10 @@ public class Testing {
   
   public void testParsing(final String p_strPath)
   {
-    Rules myRules = new Rules();
+    XMLRulesParser myRulesParser = new XMLRulesParser();
     try
     {
-      myRules.readRulesFromFile(p_strPath);
+      myRulesParser.readRulesFromFile(p_strPath);
     }
     catch (FileNotFoundException e)
     {
