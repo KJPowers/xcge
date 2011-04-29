@@ -1,9 +1,9 @@
-package org.stupidiville.games.oxcgen.shared;
+package org.xcge.shared;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.stupidiville.games.oxcgen.shared.rules.Rules;
+import org.xcge.shared.rules.Rules;
 
 /**
  * GameTable is the backbone of Ox-C-Gen.  It does the rules processing at its

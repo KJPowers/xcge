@@ -1,4 +1,4 @@
-package org.stupidiville.games.oxcgen.shared;
+package org.xcge.shared;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +9,9 @@ import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -38,28 +41,56 @@ public class XMLRulesParser implements Iterator
   protected int m_iTeamSize = -1;
   protected String m_sName = "";
   private String m_strRuleFile;
+  private String m_strSchemaFile;
   private Document m_doc;
+  private DocumentBuilderFactory m_dbf;
+  private SchemaFactory m_sf;
   
   public XMLRulesParser()
-  { }
-  
-  public void readRulesFromFile(final String p_sFileName) throws FileNotFoundException 
   {
-    m_strRuleFile = p_sFileName;
+    this(null);
+  }
+
+  public XMLRulesParser(final String p_strFileName)
+  {
+    m_strRuleFile = p_strFileName;
+  }
+  
+  public void readRulesFromFile(final String p_strFileName) throws FileNotFoundException 
+  {
+    m_strRuleFile = p_strFileName;
+    setupParsers();
     parseXML();
     parseDocument();
+  }
+
+  private void setupParsers()
+  {
+    m_dbf = DocumentBuilderFactory.newInstance();
+
+    if(m_strSchemaFile != null && m_strSchemaFile.trim().length() > 0)
+    {
+      m_dbf.setValidating(false);
+      m_dbf.setNamespaceAware(true);
+
+      m_sf = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+    }
   }
   
   private void parseXML()
   {
-    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     try
-    {      
+    {
+      if(m_strSchemaFile != null && m_strSchemaFile.trim().length() > 0)
+      {
+        m_dbf.setSchema(m_sf.newSchema(new Source[] { new StreamSource(m_strSchemaFile) }));
+      }
+
       //Using factory get an instance of document builder
-      DocumentBuilder db = dbf.newDocumentBuilder();
-      
+      DocumentBuilder db = m_dbf.newDocumentBuilder();      
       //parse using builder to get DOM representation of the XML file
       m_doc = db.parse(m_strRuleFile);
+
     } catch(ParserConfigurationException p_exp)
     {
       p_exp.printStackTrace();

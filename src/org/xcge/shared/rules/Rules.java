@@ -1,4 +1,4 @@
-package org.stupidiville.games.oxcgen.shared.rules;
+package org.xcge.shared.rules;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

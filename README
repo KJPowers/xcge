@@ -1,3 +1,12 @@
+xcge is an acronym for the eXtensible Card Game Engine.
+
+The goal of this project is to provide a library (following the Iterator design pattern) for playing arbitrary card games (think Solitaire, Poker, War, or Hearts).
+
+The various rules for these card games are stored in xml format that is defined by an XML Schema (schema/xcge.xsd).  The rules are parsed by the library which creates a state machine to iterate over.
+
+
+Glossary:
+
 GameTable
   Players sit at tables to play card games.
   Each table has one type of game.

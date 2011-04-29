@@ -1,4 +1,4 @@
-package org.stupidiville.games.cards;
+package org.xcge.cards;
 
 import javax.swing.Icon;
 

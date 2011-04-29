@@ -17,8 +17,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.stupidiville.games.cards.Card;
-import org.stupidiville.games.cards.Deck;
+import org.xcge.cards.Card;
+import org.xcge.cards.Deck;
 
 public class GameWindow extends JFrame
 {

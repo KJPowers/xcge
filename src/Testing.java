@@ -1,14 +1,14 @@
 import java.io.FileNotFoundException;
 import java.lang.String;
-import org.stupidiville.games.oxcgen.shared.XMLRulesParser;
+import org.xcge.shared.XMLRulesParser;
 
 public class Testing {
   public Testing()
   { }
   
-  public void testParsing(final String p_strPath)
+  public void testParsing(final String p_strSchema, final String p_strPath)
   {
-    XMLRulesParser myRulesParser = new XMLRulesParser();
+    XMLRulesParser myRulesParser = new XMLRulesParser(p_strSchema);
     try
     {
       myRulesParser.readRulesFromFile(p_strPath);
@@ -21,11 +21,25 @@ public class Testing {
   
   public static void main(String[] args)
   {
-    Testing test = new Testing();
-    for(String str : args)
+    if(args.length == 2)
     {
-      System.out.println("--==Evaluating " + str + "==--");
-      test.testParsing(str);
+      String strSchema = args[0];
+      String strTemp = new String();
+      int i = 1;
+      if(strSchema != null && strSchema.trim().length() > 0)
+      {
+        strTemp = " against " + strSchema;
+      }
+
+      Testing test = new Testing();
+      while(i < args.length)
+      {
+        String strFile = args[i];
+        System.out.println("--==Evaluating " + strFile + strTemp + " ==--");
+        test.testParsing(strSchema, strFile);
+
+        i++;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
-package org.stupidiville.games.oxcgen.client;
+package org.xcge.client;
 
-public class OxCGenClient {
+public class XCGEClient {
 
 }

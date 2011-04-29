@@ -1,4 +1,4 @@
-package org.stupidiville.games.oxcgen.server;
+package org.xcge.server;
 
 public class Table {
 
