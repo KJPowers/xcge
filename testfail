@@ -1,4 +1,5 @@
 #!/bin/bash
 ant runTest -Dschema="schema/po.xsd" -Drules="rules/pofail1.xml"
 ant runTest -Dschema="schema/po.xsd" -Drules="rules/pofail2.xml"
+ant runTest -Dschema="schema/po.xsd" -Drules="rules/pofail3.xml"
 

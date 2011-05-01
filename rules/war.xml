@@ -11,7 +11,7 @@
            numCards="1"
            face="up">
       <win condition="">
-        
+        A winrar is you!
       </win>
       <tie condition="">
         <deal />

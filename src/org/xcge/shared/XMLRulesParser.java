@@ -133,30 +133,73 @@ public class XMLRulesParser implements Iterator
   
   private void printTree(final String p_strPrefix, final Node p_element)
   {
-    System.out.print(p_strPrefix + p_element.getNodeType() + ": " + p_element.getNodeName());
-    
-    // Attributes
-    NamedNodeMap nnm = p_element.getAttributes();
-    if(nnm != null && nnm.getLength() > 0)
+    NamedNodeMap nnmAttr = p_element.getAttributes();
+    NodeList nlChildren = p_element.getChildNodes();
+    String strName = p_element.getNodeName();
+    String strValue = p_element.getNodeValue() == null ? "" : p_element.getNodeValue().trim();
+
+    if((strName == null || strName.charAt(0) == '#') &&         // It has no name
+       (strValue == null || strValue.trim().length() == 0) &&   // its value is null and
+       (nnmAttr == null || nnmAttr.getLength() == 0) &&         // it has no attributes and
+       (nlChildren == null || nlChildren.getLength() == 0))     // it has no children
     {
-      System.out.print(" (");
-      for(int i = 0; i < nnm.getLength(); i++)
+      return;
+    }
+
+    System.out.print(p_strPrefix + strName + " (" + getStrNodeType(p_element.getNodeType()) + "): " + strValue.trim());
+
+    // Attributes
+    if(nnmAttr != null && nnmAttr.getLength() > 0)
+    {
+      System.out.print(" [");
+      for(int i = 0; i < nnmAttr.getLength(); i++)
       {
-        Node node = nnm.item(i);
+        Node node = nnmAttr.item(i);
         if(i > 0) System.out.print(", ");
         System.out.print(node.getNodeName() + "=" + node.getNodeValue());
       }
-      System.out.print(")");
+      System.out.print("]");
     }
     System.out.println();
     
     //Child Elements
-    NodeList nodesl = p_element.getChildNodes();
-    for(int i = 0 ; i < nodesl.getLength();i++)
+    for(int i = 0 ; i < nlChildren.getLength(); i++)
     {
-      //get the employee element
-      Node node = nodesl.item(i);
+      Node node = nlChildren.item(i);
       printTree(p_strPrefix + ' ', node);
+    }
+  }
+
+  private String getStrNodeType(final short p_iNodeType)
+  {
+    switch(p_iNodeType)
+    {
+      case Node.ELEMENT_NODE:
+        return "Element";
+      case Node.ATTRIBUTE_NODE:
+        return "Attr";
+      case Node.TEXT_NODE:
+        return "Text";
+      case Node.CDATA_SECTION_NODE:
+        return "CDATASection";
+      case Node.ENTITY_REFERENCE_NODE:
+        return "EntityReference";
+      case Node.ENTITY_NODE:
+        return "Entity";
+      case Node.PROCESSING_INSTRUCTION_NODE:
+        return "ProcessingInstruction";
+      case Node.COMMENT_NODE:
+        return "Comment";
+      case Node.DOCUMENT_NODE:
+        return "Document";
+      case Node.DOCUMENT_TYPE_NODE:
+        return "DocumentType";
+      case Node.DOCUMENT_FRAGMENT_NODE:
+        return "DocumentFragment";
+      case Node.NOTATION_NODE:
+        return "Notation";
+      default:
+        return null;
     }
   }
   
