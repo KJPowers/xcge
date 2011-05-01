@@ -25,21 +25,18 @@ public class Testing {
     {
       String strSchema = args[0];
       String strTemp = new String();
-      int i = 1;
       if(strSchema != null && strSchema.trim().length() > 0)
       {
         strTemp = " against " + strSchema;
       }
 
       Testing test = new Testing();
-      while(i < args.length)
-      {
-        String strFile = args[i];
-        System.out.println("--==Evaluating " + strFile + strTemp + " ==--");
-        test.testParsing(strSchema, strFile);
+      
+      String strFile = args[1];
 
-        i++;
-      }
+      // Do the test
+      System.out.println("--==Evaluating " + strFile + strTemp + " ==--");
+      test.testParsing(strSchema, strFile);
     }
   }
 }

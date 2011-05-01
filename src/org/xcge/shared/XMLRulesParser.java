@@ -1,5 +1,7 @@
 package org.xcge.shared;
 
+import org.xcge.shared.XCGEErrorHandler;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class XMLRulesParser implements Iterator
 {
@@ -51,18 +54,25 @@ public class XMLRulesParser implements Iterator
     this(null);
   }
 
-  public XMLRulesParser(final String p_strFileName)
+  public XMLRulesParser(final String p_strSchemaFile)
   {
-    m_strRuleFile = p_strFileName;
+    m_strSchemaFile = p_strSchemaFile;
   }
-  
+
+  /* --------======== ========--------
+   * Big comment to tell myself where the action is
+   * --------======== ========--------
+   */
   public void readRulesFromFile(final String p_strFileName) throws FileNotFoundException 
   {
     m_strRuleFile = p_strFileName;
     setupParsers();
-    parseXML();
-    parseDocument();
-  }
+    if(parseXML())
+    {
+      Element eleRoot = getBasicGameInfo();
+      printTree("", eleRoot);
+    }
+  }    
 
   private void setupParsers()
   {
@@ -77,8 +87,9 @@ public class XMLRulesParser implements Iterator
     }
   }
   
-  private void parseXML()
+  private boolean parseXML()
   {
+    boolean retVal = false;
     try
     {
       if(m_strSchemaFile != null && m_strSchemaFile.trim().length() > 0)
@@ -87,10 +98,25 @@ public class XMLRulesParser implements Iterator
       }
 
       //Using factory get an instance of document builder
-      DocumentBuilder db = m_dbf.newDocumentBuilder();      
+      DocumentBuilder db = m_dbf.newDocumentBuilder();
+      
       //parse using builder to get DOM representation of the XML file
-      m_doc = db.parse(m_strRuleFile);
+      db.setErrorHandler(new XCGEErrorHandler());
+      try
+      {
+        m_doc = db.parse(m_strRuleFile);
+        retVal = true;
+      }
+      catch(SAXParseException p_exp)
+      {
+        final String strTemp;
+        if(m_strSchemaFile != null && m_strSchemaFile.trim().length() > 0)
+          strTemp = " against " + m_strSchemaFile;
+        else
+          strTemp = "";
 
+        System.out.println("Error parsing " + m_strRuleFile + strTemp + ": " + p_exp.toString());
+      }
     } catch(ParserConfigurationException p_exp)
     {
       p_exp.printStackTrace();
@@ -101,12 +127,8 @@ public class XMLRulesParser implements Iterator
     {
       p_exp.printStackTrace();
     }
-  }
-  
-  private void parseDocument()
-  {
-    Element eleRoot = getBasicGameInfo();
-    printTree("", eleRoot);
+
+    return retVal;
   }
   
   private void printTree(final String p_strPrefix, final Node p_element)

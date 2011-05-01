@@ -1,0 +1,3 @@
+#!/bin/bash
+ant runTest -Dschema="schema/po.xsd" -Drules="rules/po.xml"
+
