@@ -1,5 +1,9 @@
 #!/bin/bash
-ant runTest -Dschema="schema/po.xsd" -Drules="rules/pofail1.xml"
-ant runTest -Dschema="schema/po.xsd" -Drules="rules/pofail2.xml"
-ant runTest -Dschema="schema/po.xsd" -Drules="rules/pofail3.xml"
+ant
+echo -e "\n"
+java -jar dist/bin/xcge.jar schema/po.xsd rules/pofail1.xml
+echo -e "\n"
+java -jar dist/bin/xcge.jar schema/po.xsd rules/pofail2.xml
+echo -e "\n"
+java -jar dist/bin/xcge.jar schema/po.xsd rules/pofail3.xml
 

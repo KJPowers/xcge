@@ -1,3 +1,5 @@
 #!/bin/bash
-ant runTest -Dschema="schema/po.xsd" -Drules="rules/po.xml"
+ant
+echo -e "\n"
+java -jar dist/bin/xcge.jar schema/po.xsd rules/po.xml
 
