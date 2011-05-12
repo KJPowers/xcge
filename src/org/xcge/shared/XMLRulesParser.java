@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,6 +23,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+
+import org.xcge.shared.Game;
+import org.xcge.shared.XCGEStatics;
 
 public class XMLRulesParser implements Iterator
 {
@@ -48,6 +52,7 @@ public class XMLRulesParser implements Iterator
   private Document m_doc;
   private DocumentBuilderFactory m_dbf;
   private SchemaFactory m_sf;
+  private Game m_oGame;
   
   public XMLRulesParser()
   {
@@ -67,10 +72,11 @@ public class XMLRulesParser implements Iterator
   {
     m_strRuleFile = p_strFileName;
     setupParsers();
-    if(parseXML())
+    if(validateXML())
     {
       Element eleRoot = getBasicGameInfo();
       printTree("", eleRoot);
+      m_oGame = parseXML();
     }
   }    
 
@@ -83,11 +89,20 @@ public class XMLRulesParser implements Iterator
       m_dbf.setValidating(false);
       m_dbf.setNamespaceAware(true);
 
-      m_sf = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+      if(m_strSchemaFile.substring(m_strSchemaFile.length() - 3).equals("xsd"))
+      {
+//        m_sf = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+        m_sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+      }
+      else // if()
+      {
+        System.setProperty(SchemaFactory.class.getName() + ":" + XMLConstants.RELAXNG_NS_URI, "com.thaiopensource.relaxng.jaxp.CompactSyntaxSchemaFactory");
+        m_sf = SchemaFactory.newInstance(XMLConstants.RELAXNG_NS_URI);
+      }
     }
   }
   
-  private boolean parseXML()
+  private boolean validateXML()
   {
     boolean retVal = false;
     try
@@ -137,6 +152,7 @@ public class XMLRulesParser implements Iterator
     NodeList nlChildren = p_element.getChildNodes();
     String strName = p_element.getNodeName();
     String strValue = p_element.getNodeValue() == null ? "" : p_element.getNodeValue().trim();
+    int depth = p_strPrefix.length();
 
     if((strName == null || strName.charAt(0) == '#') &&         // It has no name
        (strValue == null || strValue.trim().length() == 0) &&   // its value is null and
@@ -146,6 +162,7 @@ public class XMLRulesParser implements Iterator
       return;
     }
 
+    System.out.println(p_strPrefix + "depth: " + depth);
     System.out.print(p_strPrefix + strName + " (" + getStrNodeType(p_element.getNodeType()) + "): " + strValue.trim());
 
     // Attributes
@@ -206,19 +223,48 @@ public class XMLRulesParser implements Iterator
   private Element getBasicGameInfo()
   {
     final Element eleRoot = m_doc.getDocumentElement();
-    System.out.print("root: " + eleRoot.getNodeName() + " (");
+//    System.out.print("root: " + eleRoot.getNodeName() + " (");
     NamedNodeMap nnm = eleRoot.getAttributes();
     for(int i = 0; i < nnm.getLength(); i++)
     {
       Node node = nnm.item(i);
       if(i > 0) System.out.print(", ");
-      System.out.print(node.getNodeName() + "=" + node.getNodeValue());
+//      System.out.print(node.getNodeName() + "=" + node.getNodeValue());
     }    
-    System.out.println(")");
+//    System.out.println(")");
     
     return eleRoot;
   }
   
+  public Game parseXML()
+  {
+    Game retGame = new Game();
+
+    final Element eleRoot = m_doc.getDocumentElement();
+    //XML Schema can't guarantee a root element value, so make sure it's "GAME" (case insensitive)
+    if(!XCGEStatics.GAME.equals(eleRoot.getNodeName().toUpperCase()))
+    {
+      return null;
+    }
+
+    // First attempt: read attributes for game name
+    NamedNodeMap nnm = eleRoot.getAttributes();
+    for(int i = 0; i < nnm.getLength(); i++)
+    {
+      Node node = nnm.item(i);
+      if(XCGEStatics.NAME.equals(node.getNodeName().toUpperCase()))
+      {
+        retGame.setName(node.getNodeValue());
+      }
+//      if(i > 0) System.out.print(", ");
+//      System.out.print(node.getNodeName() + "=" + node.getNodeValue());
+
+    }    
+    
+
+    return retGame;
+  }
+
   /*public void readRulesFromFileInputStream(final FileInputStream p_FIS)
   {
     try

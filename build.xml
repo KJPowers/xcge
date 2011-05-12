@@ -9,6 +9,7 @@
   <property name="dist"      location="dist"/>
   <property name="bin"       location="bin"/>
   <property name="img"       location="img"/>
+  <property name="lib"       location="lib"/>
 
   <target name="init">
     <!-- Create the time stamp -->
@@ -38,7 +39,7 @@
     <jar jarfile="${dist}/bin/xcge.jar"
          basedir="${bin}"
          manifest="${src}/manifest"
-         includes="**"/>
+         includes="${lib}/*,**"/>
   </target>
 
   <target name="clean"
