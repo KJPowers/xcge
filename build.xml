@@ -50,7 +50,7 @@
     <delete dir="${generated}"/>
   </target>
   
-  <target name="runTest"
+  <target name="testXML"
           depends="dist"
           description="run the tests" >
     <property name="rules" value="rules/war.xml" />
@@ -60,6 +60,19 @@
           fork="true">
       <arg value="${schema}" />
       <arg value="${rules}" />
+    </java>
+  </target>
+	  
+  <target name="testEngine"
+          depends="dist"
+          description="run the tests" >
+    <property name="rules" value="rules/war.xml" />
+    <property name="schema" value="" />
+    <java classname="TestEngine"
+          classpath="${dist}/bin/xcge.jar"
+          fork="true">
+      <!--arg value="${schema}" />
+      <arg value="${rules}" /-->
     </java>
   </target>
 </project>

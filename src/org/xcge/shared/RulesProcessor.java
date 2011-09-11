@@ -15,15 +15,17 @@ public class RulesProcessor
 {
   // The rules processing engine, this contains the rules of the game being played at this table
     // MVC Role: Controller
-  //GameRulesProcessor m_oTheRules;
+  private Rules m_oRules;
   // The seats (player API)
-  ArrayList<Player> m_alSeats;
+  private ArrayList<Player> m_alSeats;
+  private final GameState m_oGameState;
   
   RulesProcessor(final Rules p_oRules)
   {
-    setRules(p_oRules);
+    m_oRules = p_oRules;
+    m_oGameState = new GameState(m_oRules);
   }
-  
+
   public void prepare()
   {
     //m_oRules.
