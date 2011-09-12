@@ -3,8 +3,6 @@ package org.xcge.shared;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.xcge.shared.rules.Rules;
-
 /**
  * GameTable is the backbone of Ox-C-Gen.  It does the rules processing at its
  * most abstract level, driving all the rest
@@ -23,7 +21,7 @@ public class RulesProcessor
   RulesProcessor(final Rules p_oRules)
   {
     m_oRules = p_oRules;
-    m_oGameState = new GameState(m_oRules);
+    m_oGameState = new GameState();
   }
 
   public void prepare()
