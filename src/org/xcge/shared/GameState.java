@@ -21,6 +21,11 @@ public class GameState
     return m_alPlayers.size();
   }
   
+  public void asdf()
+  {
+    ;
+  }
+  
   public void removePlayer(int p_iPlayerIndex)
   {
     if(p_iPlayerIndex < m_alPlayers.size())

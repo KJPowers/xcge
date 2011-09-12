@@ -16,18 +16,22 @@ public class RulesProcessor
   private Rules m_oRules;
   // The seats (player API)
   private ArrayList<Player> m_alSeats;
-  private final GameState m_oGameState;
+  private final GameState m_oState;
   
   RulesProcessor(final Rules p_oRules)
   {
     m_oRules = p_oRules;
-    m_oGameState = new GameState();
+    m_oState = new GameState();
+  }
+  
+  private void setUpInitialGameState()
+  {
+    m_oState.
   }
 
-  public void prepare()
+  public void begin()
   {
-    //m_oRules.
-    
+    setUpInitialGameState();
   }
   
   public void processRules()
