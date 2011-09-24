@@ -1,15 +1,15 @@
 package org.xcge.shared;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.xcge.cards.Stack;
+import org.xcge.cards.CardGroup;
 
 public class GameState
 {
   private ArrayList<Player> m_alPlayers = new ArrayList<Player>();
   private int m_iCurrentPlayerIndex = 0;
-  
-  private Cards m_oCards;
+  private CardTracker m_oCardTracker;
   
   public GameState()
   { }
@@ -19,11 +19,6 @@ public class GameState
   {
     m_alPlayers.add(p_oPlayer);
     return m_alPlayers.size();
-  }
-  
-  public void asdf()
-  {
-    ;
   }
   
   public void removePlayer(int p_iPlayerIndex)
@@ -51,31 +46,46 @@ public class GameState
   }
   
   // Container class to keep track of who has what cards
-  private class Cards
+  private class CardTracker
   {
-    private ArrayList<ArrayList<Stack>> m_alCards;// = new ArrayList<ArrayList<Stack>>();
-    private int m_iNumTableStacks = 0;
+    private HashMap<Object, CardGroup> m_hmTableCards;
+    private ArrayList<HashMap<Object, CardGroup>> m_alPlayerCards = new ArrayList<HashMap<Object, CardGroup>>();
+    private int m_iNumTableGroups = 0;
     private int m_iNumPlayers = 0;
-    private int m_iNumPlayerStacks = 0;
+    private int m_iNumPlayerGroups = 0;
     
-    public Cards(final int p_iNumTableStacks, final int p_iNumPlayers, final int p_iNumPlayerStacks)
+    public CardTracker(final int p_iNumTableGroups, final int p_iNumPlayers, final int p_iNumPlayerGroups)
     {
-      m_iNumTableStacks = p_iNumTableStacks;
+      m_iNumTableGroups = p_iNumTableGroups;
       m_iNumPlayers = p_iNumPlayers;
-      m_iNumPlayerStacks = p_iNumPlayerStacks;
+      m_iNumPlayerGroups = p_iNumPlayerGroups;
       
-      m_alCards = new ArrayList<ArrayList<Stack>>(m_iNumPlayers + 1);
+      m_hmTableCards = new HashMap<Object, CardGroup>(m_iNumTableGroups);
+      m_alPlayerCards = new ArrayList<HashMap<Object, CardGroup>>(m_iNumPlayers);
       
-      m_alCards.add(new ArrayList<Stack>(m_iNumTableStacks));
       for(int iPlayerIndex = 1; iPlayerIndex <= p_iNumPlayers; iPlayerIndex++)
       {
-        m_alCards.add(new ArrayList<Stack>(m_iNumPlayerStacks));
+        m_alPlayerCards.add(new HashMap<Object, CardGroup>(m_iNumPlayerGroups));
       }
     }
     
-    public Stack getStack(final int p_iPlayerIndex, final int p_iStackIndex)
+    public CardGroup getTableGroup(final int p_iGroupIndex)
     {
-      return m_alCards.get(p_iPlayerIndex).get(p_iStackIndex);
+      validateIndex(p_iGroupIndex, m_iNumTableGroups, "Table Group");
+      return m_hmTableCards.get(p_iGroupIndex);
+    }
+    
+    public CardGroup getGroupForPlayer(final int p_iPlayerIndex, final int p_iGroupIndex)
+    {
+      validateIndex(p_iPlayerIndex, m_iNumPlayers, "Player");
+      validateIndex(p_iGroupIndex, m_iNumPlayerGroups, "Player Group");
+      return m_alPlayerCards.get(p_iPlayerIndex).get(p_iGroupIndex);
+    }
+    
+    private void validateIndex(final int iIndex, final int p_iReference, final String p_strSource)
+    {
+      if(iIndex < 0)            throw new IllegalArgumentException(p_strSource + " index cannot be negative.");
+      if(iIndex > p_iReference) throw new IllegalArgumentException(p_strSource + " index cannot be larger than capacity (" + p_iReference + ".");
     }
   }
 }

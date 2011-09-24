@@ -1,7 +1,7 @@
 package org.xcge.shared;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+//import java.util.Iterator;
 
 /**
  * GameTable is the backbone of Ox-C-Gen.  It does the rules processing at its
@@ -13,20 +13,20 @@ public class RulesProcessor
 {
   // The rules processing engine, this contains the rules of the game being played at this table
     // MVC Role: Controller
-  private Rules m_oRules;
+  private Rules m_oParsedRules;
   // The seats (player API)
   private ArrayList<Player> m_alSeats;
   private final GameState m_oState;
   
   RulesProcessor(final Rules p_oRules)
   {
-    m_oRules = p_oRules;
+    m_oParsedRules = p_oRules;
     m_oState = new GameState();
   }
   
   private void setUpInitialGameState()
   {
-    m_oState.
+//    m_oState.
   }
 
   public void begin()

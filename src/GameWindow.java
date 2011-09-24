@@ -48,8 +48,8 @@ public class GameWindow extends JFrame
     initialize();
     addMenus();
     
-    Action doThis = Action.SHOW_MAIN_MENU;
-    while(doThis != Action.QUIT)
+    Shuffle doThis = Shuffle.SHOW_MAIN_MENU;
+    while(doThis != Shuffle.QUIT)
     {
       switch(doThis)
       {
@@ -86,9 +86,9 @@ public class GameWindow extends JFrame
     this.setVisible(true);*/
   }
   
-  private Action showMainMenu()
+  private Shuffle showMainMenu()
   {
-    return Action.QUIT;
+    return Shuffle.QUIT;
   }
   
   private void initialize()
