@@ -17,6 +17,19 @@ public class StatefulCard
   {
     this(p_oCard, CardState.FACE_DOWN);
   }
+  
+  public void flip()
+  {
+    switch(m_eState)
+    {
+      case FACE_UP:
+        m_eState = CardState.FACE_DOWN;
+        break;
+      default:
+        m_eState = CardState.FACE_UP;
+        break;
+    }
+  }
 
   public Card getCard()
   {

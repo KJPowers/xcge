@@ -3,7 +3,7 @@ package org.xcge.shared;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.xcge.cards.CardGroup;
+import org.xcge.cards.CardStack;
 
 public class GameState
 {
@@ -48,8 +48,8 @@ public class GameState
   // Container class to keep track of who has what cards
   private class CardTracker
   {
-    private HashMap<Object, CardGroup> m_hmTableCards;
-    private ArrayList<HashMap<Object, CardGroup>> m_alPlayerCards = new ArrayList<HashMap<Object, CardGroup>>();
+    private HashMap<Object, CardStack> m_hmTableCards;
+    private ArrayList<HashMap<Object, CardStack>> m_alPlayerCards = new ArrayList<HashMap<Object, CardStack>>();
     private int m_iNumTableGroups = 0;
     private int m_iNumPlayers = 0;
     private int m_iNumPlayerGroups = 0;
@@ -60,22 +60,22 @@ public class GameState
       m_iNumPlayers = p_iNumPlayers;
       m_iNumPlayerGroups = p_iNumPlayerGroups;
       
-      m_hmTableCards = new HashMap<Object, CardGroup>(m_iNumTableGroups);
-      m_alPlayerCards = new ArrayList<HashMap<Object, CardGroup>>(m_iNumPlayers);
+      m_hmTableCards = new HashMap<Object, CardStack>(m_iNumTableGroups);
+      m_alPlayerCards = new ArrayList<HashMap<Object, CardStack>>(m_iNumPlayers);
       
       for(int iPlayerIndex = 1; iPlayerIndex <= p_iNumPlayers; iPlayerIndex++)
       {
-        m_alPlayerCards.add(new HashMap<Object, CardGroup>(m_iNumPlayerGroups));
+        m_alPlayerCards.add(new HashMap<Object, CardStack>(m_iNumPlayerGroups));
       }
     }
     
-    public CardGroup getTableGroup(final int p_iGroupIndex)
+    public CardStack getTableGroup(final int p_iGroupIndex)
     {
       validateIndex(p_iGroupIndex, m_iNumTableGroups, "Table Group");
       return m_hmTableCards.get(p_iGroupIndex);
     }
     
-    public CardGroup getGroupForPlayer(final int p_iPlayerIndex, final int p_iGroupIndex)
+    public CardStack getGroupForPlayer(final int p_iPlayerIndex, final int p_iGroupIndex)
     {
       validateIndex(p_iPlayerIndex, m_iNumPlayers, "Player");
       validateIndex(p_iGroupIndex, m_iNumPlayerGroups, "Player Group");

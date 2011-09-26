@@ -3,13 +3,14 @@ package org.xcge.shared.engine.action;
 import java.util.Random;
 
 import org.xcge.cards.CardGroup;
+import org.xcge.shared.GameState;
 import org.xcge.shared.engine.action.IAction;
 
 public class Shuffle implements IAction<Shuffle>
 {
   private static Shuffle m_oInstance = null;
   
-  Shuffle() { this(); }
+  Shuffle() { }
   
   public Shuffle getInstance()
   {
@@ -18,7 +19,7 @@ public class Shuffle implements IAction<Shuffle>
   }
   
   @Override
-  public static void doAction(GameState p_oGameState, final ActionCriteria p_oAC)
+  public void doAction(GameState p_oGameState, final ActionCriteria p_oAC)
   {
     Random oRandom = new Random(System.nanoTime());
     CardGroup oCards = p_oGameState.getCards(p_oAC.getCardGroup());
