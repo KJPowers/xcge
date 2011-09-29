@@ -5,13 +5,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class Deck implements Iterator<Card>
+public class Deck implements Iterator<StatefulCard>
 {
   public enum Type {STANDARD52, STANDARD54, PINOCHLE}
   
@@ -19,11 +18,10 @@ public class Deck implements Iterator<Card>
   private ArrayList<Icon> m_cardIcons;
   private Icon m_backIcon;
   private Icon m_blankIcon;
-  private ArrayList<Card> m_cards;
-  private Iterator<Card> m_iter;
+  private CardStack m_oCards;
   
   private String m_cardsFile = System.getProperty("user.dir") + File.separator + "img" + File.separator + "cards.png";
-  private String m_backFile = System.getProperty("user.dir") + File.separator + "img" + File.separator + "back.png";
+  private String m_backFile  = System.getProperty("user.dir") + File.separator + "img" + File.separator + "back.png";
   private String m_blankFile = System.getProperty("user.dir") + File.separator + "img" + File.separator + "blank.png";
   
   public Deck()
@@ -33,30 +31,28 @@ public class Deck implements Iterator<Card>
   
   public Deck(Type p_deckType)
   {
-    int index;
-    
     loadIcons();
     
     switch(p_deckType)
     {
       case STANDARD54:
-        m_cards = new ArrayList<Card>(54);
-        m_cards.add(new Card(getIcon(null, Card.Value.JOKER), m_backIcon));
+        m_oCards = new CardStack(54);
+        m_oCards.putTop(new StatefulCard(getIcon(null, Card.Value.JOKER), m_backIcon, CardState.FACE_DOWN));
         for(Card.Suit suit : Card.Suit.values())
         {
           for(Card.Value value : Card.Value.values())
           {
             if(value != Card.Value.JOKER)
             {
-              m_cards.add(new Card(suit, value, getIcon(suit, value), m_backIcon));
+              m_oCards.putTop(new StatefulCard(suit, value, getIcon(suit, value), m_backIcon, CardState.FACE_DOWN));
             }
           }
         }
-        m_cards.add(new Card(getIcon(null, Card.Value.JOKER), m_backIcon));
+        m_oCards.putTop(new StatefulCard(getIcon(null, Card.Value.JOKER), m_backIcon, CardState.FACE_DOWN));
         break;
         
       case PINOCHLE:
-        m_cards = new ArrayList<Card>(48);
+        m_oCards = new CardStack(48);
         for(Card.Suit suit : Card.Suit.values())
         {
           for(Card.Value value : Card.Value.values())
@@ -68,61 +64,50 @@ public class Deck implements Iterator<Card>
                value == Card.Value.KING  ||
                value == Card.Value.ACE)
             {
-              m_cards.add(new Card(suit, value, getIcon(suit, value), m_backIcon));
+              m_oCards.putTop(new StatefulCard(suit, value, getIcon(suit, value), m_backIcon, CardState.FACE_DOWN));
             }
           }
         }
-        for(index = 0; index < 24; index++)
-        {
-          m_cards.add(new Card(m_cards.get(index)));
-        }
+        m_oCards.putTop(m_oCards);
         break;
         
       case STANDARD52:
       default:
-        m_cards = new ArrayList<Card>(52);
+        m_oCards = new CardStack(52);
         for(Card.Suit suit : Card.Suit.values())
         {
           for(Card.Value value : Card.Value.values())
           {
             if(value != Card.Value.JOKER)
             {
-              m_cards.add(new Card(suit, value, getIcon(suit, value), m_backIcon));
+              m_oCards.putTop(new StatefulCard(new Card(suit, value, getIcon(suit, value), m_backIcon), CardState.FACE_DOWN));
             }
           }
         }        
         break;
     }
-    
-    m_iter = m_cards.iterator();
   }
   
   public void shuffle()
   {
-    int index, iTemp;
-    Card cardTemp;
-    Random generator = new Random();
-    
-    for(index = 0; index < m_cards.size(); index++)
-    {
-      iTemp = generator.nextInt(m_cards.size());
-      cardTemp = m_cards.get(iTemp);
-      m_cards.set(iTemp, m_cards.get(index));
-      m_cards.set(index, cardTemp);
-    }
-    m_iter = m_cards.iterator();
+    m_oCards.shuffle();
   }
   
   @Override
   public boolean hasNext()
   {
-    return m_iter.hasNext();
+    return m_oCards.size() > 0;
   }
   
   @Override
-  public Card next()
+  public StatefulCard next()
   {
-    return m_iter.next();
+    return m_oCards.takeTop();
+  }
+  
+  public CardStack getCardStack()
+  {
+    return m_oCards;
   }
   
   private Icon getIcon(Card.Suit p_suit, Card.Value p_value)

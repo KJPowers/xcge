@@ -12,7 +12,7 @@ class Player
     return m_strName;
   }
   
-  public void setName(p_strName);
+  public void setName(final String p_strName)
   {
     m_strName = p_strName;
   }

@@ -75,4 +75,12 @@
       <arg value="${rules}" /-->
     </java>
   </target>
+	
+	<target name="run"
+	        depends="dist"
+	        description="run! dammit, run!">
+    <java classname="Test"
+          classpath="${dist}/bin/xcge.jar"
+          fork="true" />
+	</target>
 </project>

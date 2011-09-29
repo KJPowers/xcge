@@ -14,22 +14,17 @@ public class Card
   private Icon m_iconBack;
   private Icon m_iconFront;
   
-  Card()
+  Card(final Icon p_iconFront, final Icon p_iconBack)
   {
-    this(null, Value.JOKER, null, null);
+    this(null, Value.JOKER, p_iconFront, p_iconBack);
   }
   
-  Card(Card p_card)
+  Card(final Card p_card)
   {
     this(p_card.m_suit, p_card.m_value, p_card.m_iconBack, p_card.m_iconFront);
   }
   
-  Card(Icon p_iconFront, Icon p_iconBack)
-  {
-    this(null, null, p_iconBack, p_iconFront);
-  }
-  
-  Card(Suit p_suit, Value p_value)
+  Card(final Suit p_suit, final Value p_value)
   {
     m_suit = p_suit;
     m_value = p_value;
@@ -37,7 +32,7 @@ public class Card
     m_iconFront = null;
   }
   
-  Card(Suit p_suit, Value p_value, Icon p_iconFront, Icon p_iconBack)
+  Card(final Suit p_suit, final Value p_value, final Icon p_iconFront, final Icon p_iconBack)
   {
     m_suit = p_suit;
     m_value = p_value;
@@ -45,12 +40,12 @@ public class Card
     m_iconFront = p_iconFront;
   }
   
-  public void setIconBack(Icon p_icon)
+  public void setIconBack(final Icon p_icon)
   {
     m_iconBack = p_icon;
   }
   
-  public void setIconFront(Icon p_icon)
+  public void setIconFront(final Icon p_icon)
   {
     m_iconFront = p_icon;
   }

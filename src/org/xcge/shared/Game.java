@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.String;
 
-import org.xcge.shared.rules.GameState;
+import org.xcge.shared.GameState;
 
 public class Game
 {
