@@ -10,7 +10,7 @@ public class MoveCards implements IAction<MoveCards>
   public MoveCards() { m_oInstance = this; }
   @Override
   public MoveCards getInstance()
-  { if(m_oInstance ==  null) m_oInstance = new MoveCards();
+  { if(m_oInstance == null) m_oInstance = new MoveCards();
     return m_oInstance;
   }
   

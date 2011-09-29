@@ -96,6 +96,27 @@ public class StatefulCard extends Card
     } else
     { return toString();
     }
+  }
+  
+  @Override
+  public String toShortString()
+  {
+    switch(m_eState)
+    {
+      case FACE_UP:
+        return super.toShortString();
+      case FACE_DOWN:
+      default:
+        return "A Card";
+    }
+  }
 
+  public String toShortString(final boolean p_bForceFaceUp)
+  {
+    if(p_bForceFaceUp)
+    { return super.toShortString();
+    } else
+    { return toShortString();
+    }
   }
 }

@@ -71,6 +71,19 @@ public class CardStack// implements Iterable<StatefulCard>
   }
 
   /**
+   * Print the deck top-to-bottom
+   */
+  public void printStackShort(final boolean p_bForceFaceUp)
+  {
+    reverse();
+    for(StatefulCard oCard : m_colCards)
+    {
+      System.out.println(oCard.toShortString(p_bForceFaceUp));
+    }
+    reverse();
+  }
+
+  /**
    * Set every card to p_eState
    * @param p_eState
    */

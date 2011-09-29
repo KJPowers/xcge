@@ -136,4 +136,71 @@ public class Card
     }
     return strRetVal.toString();
   }
+  
+  public String toShortString()
+  {
+    StringBuffer strRetVal = new StringBuffer();
+    Object o = new Object();
+    o.toString();    
+    switch(m_value)
+    {
+      case JOKER:
+        return "Joker!";
+      case TWO:
+        strRetVal = new StringBuffer("2 ");
+        break;
+      case THREE:
+        strRetVal = new StringBuffer("3 ");
+        break;
+      case FOUR:
+        strRetVal = new StringBuffer("4 ");
+        break;
+      case FIVE:
+        strRetVal = new StringBuffer("5 ");
+        break;
+      case SIX:
+        strRetVal = new StringBuffer("6 ");
+        break;
+      case SEVEN:
+        strRetVal = new StringBuffer("7 ");
+        break;
+      case EIGHT:
+        strRetVal = new StringBuffer("8 ");
+        break;
+      case NINE:
+        strRetVal = new StringBuffer("9 ");
+        break;
+      case TEN:
+        strRetVal = new StringBuffer("10");
+        break;
+      case JACK:
+        strRetVal = new StringBuffer("J ");
+        break;
+      case QUEEN:
+        strRetVal = new StringBuffer("Q ");
+        break;
+      case KING:
+        strRetVal = new StringBuffer("K ");
+        break;
+      case ACE:
+        strRetVal = new StringBuffer("A ");
+        break;
+    }
+    switch(m_suit)
+    {
+      case SPADES:
+        strRetVal.append("of S");
+        break;
+      case DIAMONDS:
+        strRetVal.append("of D");
+        break;
+      case CLUBS:
+        strRetVal.append("of C");
+        break;
+      case HEARTS:
+        strRetVal.append("of H");
+        break;
+    }
+    return strRetVal.toString();
+  }
 }
