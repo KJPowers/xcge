@@ -88,4 +88,14 @@ public class StatefulCard extends Card
         return "Face-down card";
     }
   }
+
+  public String toString(final boolean p_bForceFaceUp)
+  {
+    if(p_bForceFaceUp)
+    { return super.toString();
+    } else
+    { return toString();
+    }
+
+  }
 }

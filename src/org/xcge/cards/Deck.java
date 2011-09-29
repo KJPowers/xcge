@@ -36,7 +36,7 @@ public class Deck implements Iterator<StatefulCard>
     switch(p_deckType)
     {
       case STANDARD54:
-        m_oCards = new CardStack(54);
+        m_oCards = new CardStack();
         m_oCards.putTop(new StatefulCard(getIcon(null, Card.Value.JOKER), m_backIcon, CardState.FACE_DOWN));
         for(Card.Suit suit : Card.Suit.values())
         {
@@ -52,7 +52,7 @@ public class Deck implements Iterator<StatefulCard>
         break;
         
       case PINOCHLE:
-        m_oCards = new CardStack(48);
+        m_oCards = new CardStack();
         for(Card.Suit suit : Card.Suit.values())
         {
           for(Card.Value value : Card.Value.values())
@@ -73,7 +73,7 @@ public class Deck implements Iterator<StatefulCard>
         
       case STANDARD52:
       default:
-        m_oCards = new CardStack(52);
+        m_oCards = new CardStack();
         for(Card.Suit suit : Card.Suit.values())
         {
           for(Card.Value value : Card.Value.values())

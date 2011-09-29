@@ -1,7 +1,8 @@
 package org.xcge.cards;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.LinkedList;
 
 /**
  * This is a stack, or pile of cards. 
@@ -25,24 +26,23 @@ public class CardStack// implements Iterable<StatefulCard>
   /**
    * The entry with index = 0 is at the bottom of the stack. 
    */
-  private final ArrayList<StatefulCard> m_alCards;
+  private final List<StatefulCard> m_colCards;
   
   /**
    * 
-   * @param p_iCapacity this is a suggestion, not gospel
    */
-  public CardStack(int p_iCapacity)
+  public CardStack()
   {
-    m_alCards = new ArrayList<StatefulCard>(p_iCapacity);
+    m_colCards = new LinkedList<StatefulCard>();
   }
   
   /**
    * Convenience method
    * @param p_alCards
    */
-  private CardStack(final ArrayList<StatefulCard> p_alCards)
+  private CardStack(final List<StatefulCard> p_qCards)
   {
-    m_alCards = p_alCards;
+    m_colCards = p_qCards;
   }
 
   /**
@@ -50,10 +50,35 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void flip()
   {
-    Collections.reverse(m_alCards);
-    for(StatefulCard oCard : m_alCards)
+    Collections.reverse(m_colCards);
+    for(StatefulCard oCard : m_colCards)
     {
       oCard.flip();
+    }
+  }
+
+  /**
+   * Print the deck top-to-bottom
+   */
+  public void printStack(final boolean p_bForceFaceUp)
+  {
+    reverse();
+    for(StatefulCard oCard : m_colCards)
+    {
+      System.out.println(oCard.toString(p_bForceFaceUp));
+    }
+    reverse();
+  }
+
+  /**
+   * Set every card to p_eState
+   * @param p_eState
+   */
+  public void setState(final CardState p_eState)
+  {
+    for(StatefulCard oCard : m_colCards)
+    {
+      if(oCard.getState() != p_eState) oCard.setState(p_eState);
     }
   }
   
@@ -62,7 +87,7 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void reverse()
   {
-    Collections.reverse(m_alCards);
+    Collections.reverse(m_colCards);
   }
   
   /**
@@ -70,7 +95,7 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void shuffle()
   {
-    Collections.shuffle(m_alCards);
+    Collections.shuffle(m_colCards);
   }
   
   /**
@@ -79,7 +104,7 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public StatefulCard peekTop()
   {
-    return m_alCards.get(m_alCards.size() - 1);
+    return m_colCards.get(m_colCards.size() - 1);
   }
   
   /**
@@ -88,30 +113,30 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public StatefulCard peekBottom()
   {
-    return m_alCards.get(0);
+    return m_colCards.get(0);
   }
   
-  /**
-   * Look at the top x cards, but don't remove them.
-   * @param p_iCount
-   * @return
-   */
-  @SuppressWarnings("unchecked")
-  public CardStack peekTop(final int p_iCount)
-  {
-    return new CardStack((ArrayList) m_alCards.subList(m_alCards.size() - p_iCount, m_alCards.size() - 1));
-  }
+//  /**
+//   * Look at the top x cards, but don't remove them.
+//   * @param p_iCount
+//   * @return
+//   */
+//  @SuppressWarnings("unchecked")
+//  public CardStack peekTop(final int p_iCount)
+//  {
+//    return new CardStack()m_colCards.subList(m_colCards.size() - p_iCount, m_colCards.size() - 1));
+//  }
   
-  /**
-   * Look at the bottom x cards, but don't remove them.  Super cheater.
-   * @param p_iCount
-   * @return
-   */
-  @SuppressWarnings("unchecked")
-  public CardStack peekBottom(final int p_iCount)
-  {
-    return p_iCount == 0 ? new CardStack(0) : new CardStack((ArrayList) m_alCards.subList(0, p_iCount - 1));
-  }
+//  /**
+//   * Look at the bottom x cards, but don't remove them.  Super cheater.
+//   * @param p_iCount
+//   * @return
+//   */
+//  @SuppressWarnings("unchecked")
+//  public CardStack peekBottom(final int p_iCount)
+//  {
+//    return p_iCount == 0 ? new CardStack() : new CardStack(m_colCards.subList(0, p_iCount - 1));
+//  }
   
   /**
    * Remove the top card from the stack.
@@ -119,7 +144,7 @@ public class CardStack// implements Iterable<StatefulCard>
   public StatefulCard takeTop()
   {
     StatefulCard oCard = peekTop();
-    m_alCards.remove(m_alCards.size() - 1);
+    m_colCards.remove(m_colCards.size() - 1);
     return oCard;
   }
   
@@ -130,7 +155,7 @@ public class CardStack// implements Iterable<StatefulCard>
   public StatefulCard takeBottom()
   {
     StatefulCard oCard = peekBottom();
-    m_alCards.remove(0);
+    m_colCards.remove(0);
     return oCard;
   }
   
@@ -141,11 +166,10 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public CardStack takeTop(final int p_iCount)
   {
-    CardStack oCards = peekTop(p_iCount);
-    //m_alCards.removeRange(m_alCards.size() - p_iCount, m_alCards.size() - 1);
+    CardStack oCards = new CardStack();
     for(int iCount = 0; iCount < p_iCount; iCount++)
     {
-      m_alCards.remove(m_alCards.size() - 1);
+      oCards.putBottom(takeTop());
     }
     return oCards;
   }
@@ -157,11 +181,11 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public CardStack takeBottom(final int p_iCount)
   {
-    CardStack oCards = peekBottom(p_iCount);
-    //m_alCards.removeRange(0, m_alCards.size() - 1);
+    CardStack oCards = new CardStack();
+    //m_colCards.removeRange(0, m_colCards.size() - 1);
     for(int iCount = 0; iCount < p_iCount; iCount++)
     {
-      m_alCards.remove(0);
+      oCards.putTop(takeBottom());
     }
     return oCards;
   }
@@ -172,7 +196,7 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void putTop(final StatefulCard p_oCard)
   {
-    m_alCards.add(p_oCard);
+    m_colCards.add(p_oCard);
   }
   
   /**
@@ -181,8 +205,8 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void putTop(CardStack p_oCards)
   {
-    m_alCards.addAll(p_oCards.m_alCards);
-    p_oCards.m_alCards.clear();
+    m_colCards.addAll(p_oCards.m_colCards);
+    p_oCards.m_colCards.clear();
   }
   
   /**
@@ -191,8 +215,8 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void putBottom(final StatefulCard p_oCard)
   {
-    m_alCards.add(p_oCard);
-    Collections.rotate(m_alCards, 1);
+    m_colCards.add(p_oCard);
+    Collections.rotate(m_colCards, 1);
   }
   
   /**
@@ -201,9 +225,9 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public void putBottom(final CardStack p_oCards)
   {
-    m_alCards.addAll(p_oCards.m_alCards);
-    Collections.rotate(m_alCards, p_oCards.m_alCards.size());
-    p_oCards.m_alCards.clear();
+    m_colCards.addAll(p_oCards.m_colCards);
+    Collections.rotate(m_colCards, p_oCards.m_colCards.size());
+    p_oCards.m_colCards.clear();
   }
   
   /**
@@ -212,7 +236,7 @@ public class CardStack// implements Iterable<StatefulCard>
    */
   public int size()
   {
-    return m_alCards.size();
+    return m_colCards.size();
   }
 
 //  @Override

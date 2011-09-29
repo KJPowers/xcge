@@ -7,7 +7,7 @@ public class MoveCards implements IAction<MoveCards>
 {
   // Static class stuff?
   private static MoveCards m_oInstance = null;
-  MoveCards() { }
+  public MoveCards() { m_oInstance = this; }
   @Override
   public MoveCards getInstance()
   { if(m_oInstance ==  null) m_oInstance = new MoveCards();
@@ -46,7 +46,22 @@ public class MoveCards implements IAction<MoveCards>
       return m_bToTop;
     }
   }
-  
+
+  public void doAction(CardStack p_oGroupFrom, CardStack p_oGroupTo)
+  {
+    doAction(p_oGroupFrom, p_oGroupTo, 1, FromTo.TT, true);
+  }
+
+  public void doAction(CardStack p_oGroupFrom, CardStack p_oGroupTo, final int p_iCount, final boolean p_bAsGroup)
+  {
+    doAction(p_oGroupFrom, p_oGroupTo, p_iCount, FromTo.TT, p_bAsGroup);
+  }
+
+  public void doAction(CardStack p_oGroupFrom, CardStack p_oGroupTo, final FromTo p_eFromTo)
+  {
+    doAction(p_oGroupFrom, p_oGroupTo, 1, p_eFromTo, true);
+  }
+
   public void doAction(CardStack p_oGroupFrom, CardStack p_oGroupTo, final int p_iCount, final FromTo p_eFromTo, final boolean p_bAsGroup)
   {
     final CardStack oCards = (CardStack) (p_eFromTo.isFromTop() ? p_oGroupFrom.takeTop(p_iCount) : p_oGroupFrom.takeBottom());
