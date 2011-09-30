@@ -20,6 +20,7 @@ public class Test
   {
     Deck oDeck = new Deck(Deck.Type.STANDARD52);
     CardStack oCards = oDeck.getCardStack();
+    oCards.shuffle();
 
     // Make the player decks
     CardStack oCards1 = new CardStack();
@@ -43,16 +44,72 @@ public class Test
     CardStack oP2Cards = new CardStack();
     StatefulCard oP1Card;
     StatefulCard oP2Card;
-    while(oCards1.size() > 0 && oCards2.size() > 0)
+    while((oCards1.size() + oP1Cards.size()) > 0 &&
+          (oCards2.size() + oP2Cards.size()) > 0)
     {
-      oP1Card = oCards1.takeTop();
-      oP1Card.flip();
+      if(oCards1.size() + oP1Cards.size() < 10)
+      {
+        System.out.print(" ");
+      }
+      System.out.print((oCards1.size() + oP1Cards.size()) + " to ");
+      if(oCards2.size() + oP2Cards.size() < 10)
+      {
+        System.out.print(" ");
+      }
+      System.out.print((oCards2.size() + oP2Cards.size()) + ": ");
 
-      oP2Card = oCards2.takeTop();
-      oP2Card.flip();
+      if(oCards1.size() > 0)
+      {
+        oP1Card = oCards1.takeTop();
+        oP1Card.flip();
+        oP1Cards.putTop(oP1Card);
+      }
 
-      oP1Cards.putTop(oP1Card);
-      oP2Cards.putTop(oP2Card);
+      if(oCards2.size() > 0)
+      {
+        oP2Card = oCards2.takeTop();
+        oP2Card.flip();
+        oP2Cards.putTop(oP2Card);
+      }
+
+      System.out.print("Comparing " + oP1Cards.peekTop().toShortString(true) + " with " + oP2Cards.peekTop().toShortString(true) + "...");
+      switch(oCompare.doAction(oP1Cards.peekTop(), oP2Cards.peekTop(), null))
+      {
+        case P1:
+          oP1Cards.putTop(oP2Cards);
+          oP1Cards.setState(CardState.FACE_DOWN);
+          oP1Cards.shuffle();
+          System.out.println("Player 1 won " + oP1Cards.size() + " cards.");
+          oCards1.putBottom(oP1Cards);
+          break;
+        case P2:
+          oP2Cards.putTop(oP1Cards);
+          oP2Cards.setState(CardState.FACE_DOWN);
+          oP2Cards.shuffle();
+          System.out.println("Player 2 won " + oP2Cards.size() + " cards.");
+          oCards2.putBottom(oP2Cards);
+          break;
+        case TIE:
+          System.out.println("It's a tie, this means WAR!");
+          if(oCards1.size() > 3)
+          {
+            oMove.doAction(oCards1, oP1Cards, 3, false);
+          }
+          else if(oCards1.size() > 0)
+          {
+            oMove.doAction(oCards1, oP1Cards, oCards1.size() - 1, false);
+          }
+
+          if(oCards2.size() > 3)
+          {
+            oMove.doAction(oCards2, oP2Cards, 3, false);
+          }
+          else if(oCards2.size() > 0)
+          {
+            oMove.doAction(oCards2, oP2Cards, oCards2.size() - 1, false);
+          }
+          break;
+      }
     }
     if(oCards2.size() == 0 && oCards1.size() == 52)
     { System.out.println("Player 1 wins!");

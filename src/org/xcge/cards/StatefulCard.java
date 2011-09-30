@@ -99,24 +99,24 @@ public class StatefulCard extends Card
   }
   
   @Override
-  public String toShortString()
+  public String toShortString(final boolean p_bPad)
   {
     switch(m_eState)
     {
       case FACE_UP:
-        return super.toShortString();
+        return super.toShortString(p_bPad);
       case FACE_DOWN:
       default:
         return "A Card";
     }
   }
 
-  public String toShortString(final boolean p_bForceFaceUp)
+  public String toShortString(final boolean p_bForceFaceUp, final boolean p_bPad)
   {
     if(p_bForceFaceUp)
-    { return super.toShortString();
+    { return super.toShortString(p_bPad);
     } else
-    { return toShortString();
+    { return toShortString(p_bPad);
     }
   }
 }

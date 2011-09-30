@@ -119,86 +119,89 @@ public class Card
         strRetVal = new StringBuffer("Ace");
         break;
     }
+    strRetVal.append(" of ");
     switch(m_suit)
     {
       case SPADES:
-        strRetVal.append(" of Spades");
+        strRetVal.append("Spades");
         break;
       case DIAMONDS:
-        strRetVal.append(" of Diamonds");
+        strRetVal.append("Diamonds");
         break;
       case CLUBS:
-        strRetVal.append(" of Clubs");
+        strRetVal.append("Clubs");
         break;
       case HEARTS:
-        strRetVal.append(" of Hearts");
+        strRetVal.append("Hearts");
         break;
     }
     return strRetVal.toString();
   }
   
-  public String toShortString()
+  public String toShortString(final boolean p_bPad)
   {
     StringBuffer strRetVal = new StringBuffer();
     Object o = new Object();
-    o.toString();    
+    o.toString();
+    String strPad = p_bPad ? " " : "";
     switch(m_value)
     {
       case JOKER:
         return "Joker!";
       case TWO:
-        strRetVal = new StringBuffer("2 ");
+        strRetVal = new StringBuffer(strPad).append("2");
         break;
       case THREE:
-        strRetVal = new StringBuffer("3 ");
+        strRetVal = new StringBuffer(strPad).append("3");
         break;
       case FOUR:
-        strRetVal = new StringBuffer("4 ");
+        strRetVal = new StringBuffer(strPad).append("4");
         break;
       case FIVE:
-        strRetVal = new StringBuffer("5 ");
+        strRetVal = new StringBuffer(strPad).append("5");
         break;
       case SIX:
-        strRetVal = new StringBuffer("6 ");
+        strRetVal = new StringBuffer(strPad).append("6");
         break;
       case SEVEN:
-        strRetVal = new StringBuffer("7 ");
+        strRetVal = new StringBuffer(strPad).append("7");
         break;
       case EIGHT:
-        strRetVal = new StringBuffer("8 ");
+        strRetVal = new StringBuffer(strPad).append("8");
         break;
       case NINE:
-        strRetVal = new StringBuffer("9 ");
+        strRetVal = new StringBuffer(strPad).append("9");
         break;
       case TEN:
         strRetVal = new StringBuffer("10");
         break;
       case JACK:
-        strRetVal = new StringBuffer("J ");
+        strRetVal = new StringBuffer(strPad).append("J");
         break;
       case QUEEN:
-        strRetVal = new StringBuffer("Q ");
+        strRetVal = new StringBuffer(strPad).append("Q");
         break;
       case KING:
-        strRetVal = new StringBuffer("K ");
+        strRetVal = new StringBuffer(strPad).append("K");
         break;
       case ACE:
-        strRetVal = new StringBuffer("A ");
+        strRetVal = new StringBuffer(strPad).append("A");
         break;
     }
+    strRetVal.append(" of ");
     switch(m_suit)
     {
       case SPADES:
-        strRetVal.append("of S");
+        strRetVal.append("S");
         break;
       case DIAMONDS:
-        strRetVal.append("of D");
+        strRetVal.append("D");
         break;
       case CLUBS:
-        strRetVal.append("of C");
+        strRetVal.append("C");
         break;
       case HEARTS:
-        strRetVal.append("of H");
+        strRetVal.append("H");
         break;
     }
     return strRetVal.toString();
