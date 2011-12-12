@@ -2,84 +2,81 @@ package org.xcge.shared;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.xcge.cards.CardStack;
+import org.xcge.shared.engine.AbstractCardManager;
 
+/**
+ * The GameState class keeps track of - you guessed it - the game state.  This
+ * includes the location of all the cards (by extending/implementing CardTracker), the score,
+ * whose turn it is, ...?.
+ * 
+ * 
+ * @author Keith Powers - K.J.Powers@gmail.com
+ *
+ */
 public class GameState
 {
-  private ArrayList<Player> m_alPlayers = new ArrayList<Player>();
+  private final List<Seat> m_alSeats;
   private int m_iCurrentPlayerIndex = 0;
   private CardTracker m_oCardTracker;
   
-  public GameState()
-  { }
-  
-  // 
-  public int addPlayer(Player p_oPlayer)
+  public GameState(final int p_iNumSeats)
   {
-    m_alPlayers.add(p_oPlayer);
-    return m_alPlayers.size();
+    m_alSeats = new ArrayList<Seat>(p_iNumSeats);
   }
   
-  public void removePlayer(int p_iPlayerIndex)
-  {
-    if(p_iPlayerIndex < m_alPlayers.size())
-    {
-      m_alPlayers.remove(p_iPlayerIndex);
-    }
-  }
+  //
   
-  // Getters / setters
-  public Player getCurrentPlayer()
-  {
-    return m_alPlayers.get(m_iCurrentPlayerIndex);
-  }
-  
-  protected ArrayList<Player> getPlayers()
-  {
-    return m_alPlayers;
-  }
-  
-  public void setPlayers(ArrayList<Player> p_alPlayers)
-  {
-    m_alPlayers = p_alPlayers;
-  }
+//  // Getters / setters
+//  public Player getCurrentPlayer()
+//  {
+//    return m_alPlayers.get(m_iCurrentPlayerIndex);
+//  }
+//  
+//  protected ArrayList<Player> getPlayers()
+//  {
+//    return m_alPlayers;
+//  }
+//  
+//  public void setPlayers(ArrayList<Player> p_alPlayers)
+//  {
+//    m_alPlayers = p_alPlayers;
+//  }
   
   // Container class to keep track of who has what cards
   private class CardTracker
   {
-    private HashMap<Object, CardStack> m_hmTableCards;
-    private ArrayList<HashMap<Object, CardStack>> m_alPlayerCards = new ArrayList<HashMap<Object, CardStack>>();
-    private int m_iNumTableGroups = 0;
-    private int m_iNumPlayers = 0;
-    private int m_iNumPlayerGroups = 0;
-    
+    private AbstractCardManager m_oCardManager = new AbstractCardManager(
+                                                   new ArrayList<HashMap<Object, CardStack>>(), 0, 0, 0);
+
     public CardTracker(final int p_iNumTableGroups, final int p_iNumPlayers, final int p_iNumPlayerGroups)
     {
-      m_iNumTableGroups = p_iNumTableGroups;
-      m_iNumPlayers = p_iNumPlayers;
-      m_iNumPlayerGroups = p_iNumPlayerGroups;
+      m_oCardManager.m_iNumTableGroups = p_iNumTableGroups;
+      m_oCardManager.m_iNumPlayers = p_iNumPlayers;
+      m_oCardManager.m_iNumPlayerGroups = p_iNumPlayerGroups;
       
-      m_hmTableCards = new HashMap<Object, CardStack>(m_iNumTableGroups);
-      m_alPlayerCards = new ArrayList<HashMap<Object, CardStack>>(m_iNumPlayers);
+      m_oCardManager.m_hmTableCards = new HashMap<Object, CardStack>(m_oCardManager.m_iNumTableGroups);
+      m_oCardManager.m_alPlayerCards = new ArrayList<HashMap<Object, CardStack>>(m_oCardManager.m_iNumPlayers);
       
       for(int iPlayerIndex = 1; iPlayerIndex <= p_iNumPlayers; iPlayerIndex++)
       {
-        m_alPlayerCards.add(new HashMap<Object, CardStack>(m_iNumPlayerGroups));
+        m_oCardManager.m_alPlayerCards.add(new HashMap<Object, CardStack>(m_oCardManager.m_iNumPlayerGroups));
       }
     }
     
     public CardStack getTableGroup(final int p_iGroupIndex)
     {
-      validateIndex(p_iGroupIndex, m_iNumTableGroups, "Table Group");
-      return m_hmTableCards.get(p_iGroupIndex);
+      validateIndex(p_iGroupIndex, m_oCardManager.m_iNumTableGroups, "Table Group");
+      return m_oCardManager.m_hmTableCards.get(p_iGroupIndex);
     }
     
     public CardStack getGroupForPlayer(final int p_iPlayerIndex, final int p_iGroupIndex)
     {
-      validateIndex(p_iPlayerIndex, m_iNumPlayers, "Player");
-      validateIndex(p_iGroupIndex, m_iNumPlayerGroups, "Player Group");
-      return m_alPlayerCards.get(p_iPlayerIndex).get(p_iGroupIndex);
+      validateIndex(p_iPlayerIndex, m_oCardManager.m_iNumPlayers, "Player");
+      validateIndex(p_iGroupIndex, m_oCardManager.m_iNumPlayerGroups, "Player Group");
+      return m_oCardManager.m_alPlayerCards.get(p_iPlayerIndex).get(p_iGroupIndex);
     }
     
     private void validateIndex(final int iIndex, final int p_iReference, final String p_strSource)

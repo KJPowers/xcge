@@ -2,6 +2,7 @@ import org.xcge.cards.CardStack;
 import org.xcge.cards.Deck;
 import org.xcge.cards.StatefulCard;
 import org.xcge.cards.CardState;
+import org.xcge.shared.GameState;
 import org.xcge.shared.engine.action.MoveCards;
 import org.xcge.shared.engine.action.SingleCardCompare;
 
@@ -13,7 +14,119 @@ public class Test
   {
     Test test = new Test();
     
-    test.war();
+    test.war2();
+  }
+  
+  public void war2()
+  {
+    GameState oGameState = new GameState(2);
+    oGameState.setNumPlayAreaStacks(2);
+    //oGameState.setNumPlayerStacks(0);
+    //oGameState.setNumPlayerHandStacks(1);
+    //oGameState.setDealer(oGameState.getSeatByIndex(0));
+    
+    Deck oDeck = new Deck(Deck.Type.STANDARD52);
+    CardStack oCards = oDeck.getCardStack();
+    oCards.shuffle();
+    
+    oGameState.deal(oCards, GameState.DEAL_ALL);
+    SingleCardCompare oCompare = new SingleCardCompare(SingleCardCompare.Ranking.ACE_HIGH);
+    while(oGameState.getHandCardStack(/* player index */0, /* hand index */0).size() > 0 &&
+          oGameState.getHandCardStack(/* player index */1, /* hand index */0).size() > 0)
+    {
+      int iCount0 = oGameState.getHandCardStack(0, 0).size() + oGameState.getPlayAreaCardStack(0).size();
+      int iCount1 = oGameState.getHandCardStack(1, 0).size() + oGameState.getPlayAreaCardStack(1).size();
+      if(iCount0 < 10)
+      {
+        System.out.print(" ");
+      }
+      System.out.print(iCount0 + " to ");
+      if(iCount1 < 10)
+      {
+        System.out.print(" ");
+      }
+      System.out.print(iCount1 + ": ");
+      
+      try
+      {
+        oGameState.move(1, oGameState.getHandCardStack(0, 0), oGameState.getPlayAreaCardStack(0));
+      }
+      catch(final Throwable p_exp)
+      {
+        // S'ok.  We'll just let this one slide
+      }
+      
+      try
+      {
+        oGameState.move(1, oGameState.getHandCardStack(1, 0), oGameState.getPlayAreaCardStack(1));
+      }
+      catch(final Throwable p_exp)
+      {
+        // S'ok.  We'll just let this one slide
+      }
+      // Now turn them face-up
+      oGameState.setState(oGameState.getPlayAreaCardStack(0, 1), CardState.FACE_UP);
+      oGameState.setState(oGameState.getPlayAreaCardStack(1, 1), CardState.FACE_UP);
+      
+      System.out.print("Comparing " +
+                       oGameState.getPlayAreaTopCard(0).toString() +
+                       " with " +
+                       oGameState.getPlayAreaTopCard(1).toString() +
+                       "...");
+      switch(oCompare.doAction(oGameState.getPlayAreaTopCard(0),
+                               oGameState.getPlayAreaTopCard(1),
+                               null))
+      {
+        case P1:
+          // move P2 table stack to P1 table stack
+          oGameState.move(all, oGameState.getPlayAreaCardStack(1), top, oGameState.getPlayAreaCardStack(0), top, all_at_once);
+          // flip them face down
+          oGameState.setState(oGameState.getPlayAreaCardStack(0), CardState.FACE_DOWN);
+          // shuffle
+          oGameState.shuffle(oGameState.getPlayAreaCardStack(0));
+          // print results
+          System.out.println("Player 1 won " +
+                             oGameState.getPlayAreaCardStack(0).size() +
+                             " cards.");
+          // move P1 table stack to bottom of P1 hand
+          oGameState.move(all, oGameState.getPlayAreaCardStack(0), oGameState.getHandCardStack(0));
+          break;
+        case P2:
+          // move P1 table stack to P2 table stack
+          oGameState.move(all, oGameState.getPlayAreaCardStack(0), top, oGameState.getPlayAreaCardStack(1), top, all_at_once);
+          // flip them face down
+          oGameState.setState(oGameState.getPlayAreaCardStack(1), CardState.FACE_DOWN);
+          // shuffle
+          oGameState.shuffle(oGameState.getPlayAreaCardStack(1));
+          // print results
+          System.out.println("Player 2 won " +
+                             oGameState.getPlayAreaCardStack(1).size() +
+                             " cards.");
+          // move P2 table stack to bottom of P2 hand
+          oGameState.move(all, oGameState.getPlayAreaCardStack(1), oGameState.getHandCardStack(1));
+          break;
+        case TIE:
+          System.out.println("It's a tie, this means WAR!");
+          if(oGameState.getHandCardStack(0).size() > 3)
+          {
+            //oMove.doAction(oCards1, oP1Cards, 3, false);
+          }
+          else if(oGameState.getHandCardStack(0).size() > 0)
+          {
+            oMove.doAction(oCards1, oP1Cards, oCards1.size() - 1, false);
+          }
+
+          if(oCards2.size() > 3)
+          {
+            oMove.doAction(oCards2, oP2Cards, 3, false);
+          }
+          else if(oCards2.size() > 0)
+          {
+            oMove.doAction(oCards2, oP2Cards, oCards2.size() - 1, false);
+          }
+          break;
+      }
+    }
   }
 
   public void war()
