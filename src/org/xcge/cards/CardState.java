@@ -9,10 +9,12 @@ public enum CardState
   private final boolean m_bValidInitialState;
   
   CardState(final boolean p_bValidInitialState)
-  { m_bValidInitialState = p_bValidInitialState;
+  {
+    m_bValidInitialState = p_bValidInitialState;
   }
   
   public boolean isValidInitialState()
-  { return m_bValidInitialState;
+  {
+    return m_bValidInitialState;
   }
 }

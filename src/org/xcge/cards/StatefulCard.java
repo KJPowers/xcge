@@ -1,27 +1,14 @@
 package org.xcge.cards;
 
-import javax.swing.Icon;
-
 import org.xcge.cards.CardState;
 
 public class StatefulCard extends Card
 {
   private CardState m_eState;
 
-  public StatefulCard(final Icon p_iconFront, final Icon p_iconBack)
+  public StatefulCard(final Suit p_suit, final Value p_value, final CardState p_eState)
   {
-    this(p_iconFront, p_iconBack, CardState.FACE_DOWN);
-  }
-
-  public StatefulCard(final Icon p_iconFront, final Icon p_iconBack, final CardState p_eState)
-  {
-    super(p_iconFront, p_iconBack);
-    m_eState = p_eState;
-  }
-
-  public StatefulCard(final Suit p_suit, final Value p_value, final Icon p_iconFront, final Icon p_iconBack, final CardState p_eState)
-  {
-    super(p_suit, p_value, p_iconFront, p_iconBack);
+    super(p_suit, p_value);
     m_eState = p_eState;
   }
   
@@ -64,18 +51,6 @@ public class StatefulCard extends Card
     m_eState = p_eState;
   }
   
-  public Icon getIcon()
-  {
-    switch(m_eState)
-    {
-      case FACE_UP:
-        return getIconFront();
-      case FACE_DOWN:
-      default:
-        return getIconBack();
-    }
-  }
-  
   @Override
   public String toString()
   {
@@ -92,9 +67,11 @@ public class StatefulCard extends Card
   public String toString(final boolean p_bForceFaceUp)
   {
     if(p_bForceFaceUp)
-    { return super.toString();
+    {
+      return super.toString();
     } else
-    { return toString();
+    {
+      return toString();
     }
   }
   
@@ -110,13 +87,5 @@ public class StatefulCard extends Card
         return "A Card";
     }
   }
-
-  public String toShortString(final boolean p_bForceFaceUp, final boolean p_bPad)
-  {
-    if(p_bForceFaceUp)
-    { return super.toShortString(p_bPad);
-    } else
-    { return toShortString(p_bPad);
-    }
-  }
 }
+
