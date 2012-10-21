@@ -1,6 +1,8 @@
-package org.xcge.cards;
+package org.xcge.cards.concrete;
 
-public enum ValueEnum
+import org.xcge.cards.IRank;
+
+public enum FrenchRankEnum implements IRank
 {
   TWO   ("2"),
   THREE ("3"),
@@ -20,7 +22,7 @@ public enum ValueEnum
   private final String m_strName;
   private final String m_strShortName;
   
-  private ValueEnum(final String p_strName)
+  private FrenchRankEnum(final String p_strName)
   {
     m_strName = p_strName;
     m_strShortName = p_strName.substring(0, Math.min(2, p_strName.length()));

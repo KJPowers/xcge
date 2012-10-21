@@ -3,59 +3,63 @@ package org.xcge.cards;
 /**
  * The Card class is a representation of a basic playing card.  It is extensible for the purpose of, for example, storing an image.
  */
-public class Card
+public class BaseCard implements ICard
 {
-  private ValueEnum m_eValue;
-  private SuitEnum  m_eSuit;
+  private ISuit m_iSuit;
+  private IRank m_iRank;
 
   /**
    *  The default constructor takes as parameters the suit and rank of the card.
    */  
-  final Card(final SuitEnum p_eSuit, final ValueEnum p_eValue)
+  public BaseCard(final ISuit p_iSuit, final IRank p_iRank)
   {
-    m_eSuit = p_eSuit;
-    m_eValue = p_eValue;
+    m_iSuit = p_iSuit;
+    m_iRank = p_iRank;
   }
   
-  final Card(final Card p_oCard)
+  public BaseCard(final ICard p_iCard)
   {
-    m_eValue = p_oCard.m_eValue;
-    m_eSuit = p_oCard.m_eSuit;
+    m_iSuit = p_iCard.getSuit();
+    m_iRank = p_iCard.getRank();
   }
   
   /**
    * Get the card's suit
    */
-  public final SuitEnum getSuit()
+  @Override
+  public final ISuit getSuit()
   {
-    return m_eSuit;
+    return m_iSuit;
   }
   
   /**
    * Get the card's rank.
    */
-  public final ValueEnum getValue()
+  @Override
+  public final IRank getRank()
   {
-    return m_eValue;
+    return m_iRank;
   }
   
   /**
    * Get a String representation of this card.
    */
+  @Override
   public String toString()
   {
-    return new StringBuffer(m_eValue.toString())
+    return new StringBuffer(m_iRank.toString())
                     .append(" of ")
-                    .append(m_eSuit.toString()).toString();
+                    .append(m_iSuit.toString()).toString();
   }
   
   /**
    * Get a short, normalized String representation of this card.
    */
+  @Override
   public String toShortString(final boolean p_bPad)
   {
-    return new StringBuffer(m_eValue.toShortString(p_bPad))
+    return new StringBuffer(m_iRank.toShortString(p_bPad))
                     .append(" of ")
-                    .append(m_eSuit.toShortString());
+                    .append(m_iSuit.toShortString()).toString();
   }
 }

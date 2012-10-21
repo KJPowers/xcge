@@ -1,6 +1,7 @@
 package org.xcge.cards;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -11,15 +12,10 @@ import java.util.LinkedList;
  *  always face-up.
  *  War: The cards in-hand are a stack, all face down.  They are turned one at a time and placed face-up in front of
  *  the player (a separate stack).
- *  
- * Operations on the cards are kept as simple as possible.  Imagine all operations on stacks as happening in 2.5
- * dimensions.  --== OR ==--  All cards are moved N, S, E or W, but they are never rotated or flipped (except via the
- * flip() method).  When dividing stacks of cards, it is always done as if cutting a deck.  It is possible to take a
- * single stateful (face-up or face-down) card or to take another stack of cards that preserves the order and state of
- * all included cards
  */
-public class CardStack// implements Iterable<StatefulCard>
+public class CardStack implements Iterable<StatefulCard>
 {
+  @SuppressWarnings("unused")
   private static final long serialVersionUID = -8899315466153998363L;
   
   // TODO Optimize with a Deque, but then I can't use java.util.Collections to do all its neat stuff.
@@ -40,7 +36,7 @@ public class CardStack// implements Iterable<StatefulCard>
    * Convenience method
    * @param p_alCards
    */
-  private CardStack(final List<StatefulCard> p_qCards)
+  protected CardStack(final List<StatefulCard> p_qCards)
   {
     m_colCards = p_qCards;
   }
@@ -128,28 +124,6 @@ public class CardStack// implements Iterable<StatefulCard>
   {
     return m_colCards.get(0);
   }
-  
-//  /**
-//   * Look at the top x cards, but don't remove them.
-//   * @param p_iCount
-//   * @return
-//   */
-//  @SuppressWarnings("unchecked")
-//  public CardStack peekTop(final int p_iCount)
-//  {
-//    return new CardStack()m_colCards.subList(m_colCards.size() - p_iCount, m_colCards.size() - 1));
-//  }
-  
-//  /**
-//   * Look at the bottom x cards, but don't remove them.  Super cheater.
-//   * @param p_iCount
-//   * @return
-//   */
-//  @SuppressWarnings("unchecked")
-//  public CardStack peekBottom(final int p_iCount)
-//  {
-//    return p_iCount == 0 ? new CardStack() : new CardStack(m_colCards.subList(0, p_iCount - 1));
-//  }
   
   /**
    * Remove the top card from the stack.
@@ -252,34 +226,9 @@ public class CardStack// implements Iterable<StatefulCard>
     return m_colCards.size();
   }
 
-//  @Override
-//  public Iterator<StatefulCard> iterator()
-//  {
-//    return new CardGroupIterator(this);
-//  }
-//  
-//  private class CardGroupIterator implements Iterator<StatefulCard>
-//  {
-//    CardStack m_oCards;
-//    public CardGroupIterator(final CardStack p_oCards)
-//    {
-//      m_oCards = p_oCards;
-//    }
-//    
-//    @Override
-//    public boolean hasNext()
-//    {
-//      return m_oCards.size() > 0;
-//    }
-//
-//    @Override
-//    public StatefulCard next()
-//    {
-//      return m_oCards.takeTop();
-//    }
-//
-//    @Override
-//    public void remove() { }
-//    
-//  }
+  @Override
+  public Iterator<StatefulCard> iterator()
+  {
+    return m_colCards.iterator();
+  }
 }

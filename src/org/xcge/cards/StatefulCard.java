@@ -2,13 +2,13 @@ package org.xcge.cards;
 
 import org.xcge.cards.CardState;
 
-public class StatefulCard extends Card
+public class StatefulCard extends BaseCard
 {
   private CardState m_eState;
 
-  public StatefulCard(final Suit p_suit, final Value p_value, final CardState p_eState)
+  public StatefulCard(final ISuit p_suit, final IRank p_rank, final CardState p_eState)
   {
-    super(p_suit, p_value);
+    super(p_suit, p_rank);
     m_eState = p_eState;
   }
   
@@ -17,15 +17,15 @@ public class StatefulCard extends Card
     this(p_oCard, p_oCard.getState());
   }
   
-  public StatefulCard(final Card p_oCard, final CardState p_eState)
+  public StatefulCard(final ICard p_iCard, final CardState p_eState)
   {
-    super(p_oCard);
+    super(p_iCard);
     m_eState = p_eState;
   }
 
-  public StatefulCard(final Card p_oCard)
+  public StatefulCard(final ICard p_iCard)
   {
-    this(p_oCard, CardState.FACE_DOWN);
+    this(p_iCard, CardState.FACE_DOWN);
   }
   
   public void flip()

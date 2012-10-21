@@ -9,7 +9,7 @@ import org.xcge.cards.CardStack;
  * Track and move cards
  * @author Keith Powers (K.J.Powers@gmail.com)
  */
-public abstract class AbstractCardManager
+public class CardManager
 {
   public static final String TABLE = "Table";
   
@@ -24,13 +24,20 @@ public abstract class AbstractCardManager
    * @param p_colSeatNames
    * @param p_colSeatStackNames
    */
-  public AbstractCardManager(final Set<String> p_colTableStackNames,
-                             final Set<String> p_colSeatNames,
-                             final Set<String> p_colSeatStackNames)
+  public CardManager(final Set<String> p_colTableStackNames,
+                     final Set<String> p_colSeatNames,
+                     final Set<String> p_colSeatStackNames)
   {
-    m_iNumTableGroups = validateStackNames(p_colTableStackNames);
-    m_iNumSeats       = validateSeatNames (p_colSeatNames);
-    m_iNumSeatGroups  = validateStackNames(p_colSeatStackNames);
+    try
+    {
+      m_iNumTableGroups = validateStackNames(p_colTableStackNames);
+      m_iNumSeats       = validateSeatNames (p_colSeatNames);
+      m_iNumSeatGroups  = validateStackNames(p_colSeatStackNames);
+    }
+    catch(Throwable p_ex)
+    {
+      ;
+    }
     
     m_hmCards = new HashMap<String, HashMap<String, CardStack>>(m_iNumSeats + 1);
     HashMap<String, CardStack> hmCards = new HashMap<String, CardStack>(m_iNumTableGroups);

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.xcge.cards.CardStack;
-import org.xcge.shared.engine.AbstractCardManager;
+import org.xcge.table.Tracker;
 
 /**
  * The GameState class keeps track of - you guessed it - the game state.  This
@@ -48,7 +48,7 @@ public class GameState
   // Container class to keep track of who has what cards
   private class CardTracker
   {
-    private AbstractCardManager m_oCardManager = new AbstractCardManager(
+    private Tracker m_oCardManager = new Tracker(
                                                    new ArrayList<HashMap<Object, CardStack>>(), 0, 0, 0);
 
     public CardTracker(final int p_iNumTableGroups, final int p_iNumPlayers, final int p_iNumPlayerGroups)

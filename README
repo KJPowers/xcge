@@ -6,7 +6,7 @@ My name is Keith, I'm a lazy Java developer with delusions of productivity. You 
 --== WHAT ==--
 You're reading the README for xcge: the eXtensible Card Game Engine. xcge may be a bit of a misnomer since I don't have any real plans for extending the engine or providing deep hooks for unforseen plugins/additions. I chose the word extensible because I'm using XML to specify the game rules. Perhaps "the general purpose card game engine" would have been a better name, but I already bought xcge.org...
 
-That said, what is xcge? Simply put, it's an engine to play card games (think Solitaire, Poker, War, or Hearts - NOT Magic: The Gathering). It accomplishes this by reading formalized rules specifications and accepting, validating, and applying player inputs to these rules. It is _NOT_ an AI (though it can be used in conjunction with them) - it simply processes the rules and announces important things about the game (ie: "illegal move", or "Player two won!").
+That said, what is xcge? Simply put, it's an engine to play card games (think Solitaire, Poker, War, or Hearts - NOT Magic: The Gathering). It accomplishes this by reading formalized rules specifications and accepting, validating, and applying player inputs to these rules. It is _NOT_ an AI (though it can be used in conjunction with them) - it simply deals the cards, processes the rules and announces important things about the game (ie: "illegal move", or "Player two won!").
 
 Design goals:
 - Flexibility:
@@ -15,16 +15,18 @@ Design goals:
   - There may be multiple ways to win.
   - Jacks may beat Aces, 4s and 6s - but not 5s.
   - Team-based games are fun and should be accomodated.
+  - Card visibility may have complex rules (ie: Indian poker - everyone ELSE can see your card, but you cannot; Golf - Only you can see your cards, but only once per hand).
 - Ease of writing rules documents*:
-  - There should be no concepts that non-programmers will have trouble grasping (for loops, inheritence, variable scoping).
+  - There should be as few concepts  as possible that non-programmers can have trouble grasping (for loops, inheritence, variable scoping). Common tasks should be easy, and difficult tasks should be possible (thanks for that criterion, Larry Wall!)
   - The rules should be readable: XML is easy for machines and has great schema validators, but can be very cumbersome to write by hand. YAML looks more natural but doesn't validate as easily.
 - The source code should remain maintainable.
 - More?
 
-*Eventually there will be a tool to build card games without needing to know YAML, XML, or really much of anything about programming. This, however, is a long-term goal and is certainly dependent on me actually finishing xcge.
+*(Eventually there will be a tool to build card games without needing to know YAML, XML, or really much of anything about programming. This, however, is a long-term goal and is certainly dependent on me actually finishing xcge.)
 
 --== WHERE ==--
-I hail from the Capital Region of New York, USA, Earth, Solar system, Milky Way. 45s, the game that inspired me to write xcge comes from, well, elsewhere. It's popular in Massachusetts and New Hampshire though, so blame the folks who live there, too.
+I hail from the Capital Region of New York, USA.
+45s, the game that inspired me to write xcge comes from, well, elsewhere. It's popular in Massachusetts and New Hampshire though, so blame the folks who live there, too.
 
 --== WHEN ==--
 I've had the idea for xcge since 2007 or 2008. Here it is, in February 2012, and I've finally been goaded into putting forth a real effort towards finishing it.
@@ -32,5 +34,5 @@ I've had the idea for xcge since 2007 or 2008. Here it is, in February 2012, and
 --== WHY ==--
 Because it hasn't been done yet.
 
-There have been a few attempts at writing a general-purpose card game programs, but nothing with all the elements I want. The rules were either strictly honor system or looked more like Lisp and C got drunk and had a terrible, terrible child together. So xcge is my attempt to follow in the footsteps of Bram Cohen (BitTorrent) - I want the true value of xcge to be in the rules schema document, and to simply provide a reference implementation.
+There have been a few attempts at writing a general-purpose card game programs, but nothing with all the elements I want. The rules were either strictly honor system or looked more like Lisp and C got drunk and had a terrible, misbehaving child together. So xcge is my attempt to follow in the footsteps of Bram Cohen (BitTorrent) - I want the true value of xcge to be in the rules schema document, and to simply provide a reference implementation.
 

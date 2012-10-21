@@ -1,6 +1,8 @@
-package org.xcge.cards;
+package org.xcge.cards.concrete;
 
-public enum FrenchSuitEnum
+import org.xcge.cards.ISuit;
+
+public enum FrenchSuitEnum implements ISuit
 {
   SPADES   ("Spades"),
   DIAMONDS ("Diamonds"),
@@ -10,7 +12,7 @@ public enum FrenchSuitEnum
   private final String m_strName;
   private final String m_strShortName;
   
-  private SuitEnum(final String p_strName)
+  private FrenchSuitEnum(final String p_strName)
   {
     m_strName = p_strName;
     m_strShortName = p_strName.substring(0, 1);

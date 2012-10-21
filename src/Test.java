@@ -1,5 +1,5 @@
 import org.xcge.cards.CardStack;
-import org.xcge.cards.Deck;
+import org.xcge.cards.FrenchDeck;
 import org.xcge.cards.StatefulCard;
 import org.xcge.cards.CardState;
 import org.xcge.shared.GameState;
@@ -25,7 +25,7 @@ public class Test
     //oGameState.setNumPlayerHandStacks(1);
     //oGameState.setDealer(oGameState.getSeatByIndex(0));
     
-    Deck oDeck = new Deck(Deck.Type.STANDARD52);
+    FrenchDeckFactory oDeck = new FrenchDeckFactory(FrenchDeckFactory.Variant.STANDARD52);
     CardStack oCards = oDeck.getCardStack();
     oCards.shuffle();
     
@@ -131,7 +131,7 @@ public class Test
 
   public void war()
   {
-    Deck oDeck = new Deck(Deck.Type.STANDARD52);
+    FrenchDeckFactory oDeck = new FrenchDeckFactory(FrenchDeckFactory.Variant.STANDARD52);
     CardStack oCards = oDeck.getCardStack();
     oCards.shuffle();
 
@@ -246,7 +246,7 @@ public class Test
   
   public void testEngine()
   {
-    Deck oDeck = new Deck();
+    FrenchDeckFactory oDeck = new FrenchDeckFactory();
     CardStack oCards = oDeck.getCardStack();
     oCards.flip();
     
