@@ -1,7 +1,7 @@
 package org.xcge.cards.concrete;
 
 import org.xcge.cards.CardStack;
-import org.xcge.cards.CardState;
+import org.xcge.cards.CardStateEnum;
 import org.xcge.cards.IDeckFactory;
 import org.xcge.cards.IRank;
 import org.xcge.cards.ISuit;
@@ -22,18 +22,18 @@ public class FrenchDeckFactory implements IDeckFactory
     switch(p_deckType)
     {
       case STANDARD54:
-        oCards.putTop(new StatefulCard(null, RankEnum.JOKER, CardState.FACE_DOWN));
+        oCards.putTop(new StatefulCard(null, RankEnum.JOKER, CardStateEnum.FACE_DOWN));
         for(ISuit suit : SuitEnum.values())
         {
           for(IRank rank : RankEnum.values())
           {
             if(rank != RankEnum.JOKER)
             {
-              oCards.putTop(new StatefulCard(suit, rank, CardState.FACE_DOWN));
+              oCards.putTop(new StatefulCard(suit, rank, CardStateEnum.FACE_DOWN));
             }
           }
         }
-        oCards.putTop(new StatefulCard(null, RankEnum.JOKER, CardState.FACE_DOWN));
+        oCards.putTop(new StatefulCard(null, RankEnum.JOKER, CardStateEnum.FACE_DOWN));
         break;
         
       case PINOCHLE:
@@ -48,7 +48,7 @@ public class FrenchDeckFactory implements IDeckFactory
                rank == RankEnum.KING  ||
                rank == RankEnum.ACE)
             {
-              oCards.putTop(new StatefulCard(suit, rank, CardState.FACE_DOWN));
+              oCards.putTop(new StatefulCard(suit, rank, CardStateEnum.FACE_DOWN));
             }
           }
         }
@@ -63,7 +63,7 @@ public class FrenchDeckFactory implements IDeckFactory
           {
             if(rank != RankEnum.JOKER)
             {
-              oCards.putTop(new StatefulCard(suit, rank, CardState.FACE_DOWN));
+              oCards.putTop(new StatefulCard(suit, rank, CardStateEnum.FACE_DOWN));
             }
           }
         }        

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.String;
 
-import org.xcge.shared.GameState;
+import org.xcge.shared.Table;
 
 public class Game
 {
@@ -12,9 +12,9 @@ public class Game
   // I'm doing it this way because I don't have a reference Google to find out how to do pointers in Java, and I don't remember at 2am.
   // FIXME later
   private ArrayList<String> m_colTags;
-  private HashMap<String, GameState> m_hmStates;
+  private HashMap<String, Table> m_hmStates;
 
-  public void Game(final String p_strName, final ArrayList<String> p_colTags, final HashMap<String, GameState> p_hmStates)
+  public void Game(final String p_strName, final ArrayList<String> p_colTags, final HashMap<String, Table> p_hmStates)
   {
     m_strName = p_strName;
     m_colTags = p_colTags;
@@ -47,11 +47,11 @@ public class Game
     if(m_colTags != null) { m_colTags.remove(p_strTag); }
   }
 
-  public HashMap<String, GameState> getStates() { return m_hmStates; }
-  public void setStates(final HashMap<String, GameState> p_hmStates) { m_hmStates = p_hmStates; }
-  public void addState(final String p_strKey, final GameState p_State)
+  public HashMap<String, Table> getStates() { return m_hmStates; }
+  public void setStates(final HashMap<String, Table> p_hmStates) { m_hmStates = p_hmStates; }
+  public void addState(final String p_strKey, final Table p_State)
   {
-    if(m_hmStates == null) { m_hmStates = new HashMap<String, GameState>(); }
+    if(m_hmStates == null) { m_hmStates = new HashMap<String, Table>(); }
     if(!m_hmStates.containsKey(p_strKey) || m_hmStates.get(p_strKey) != null) { m_hmStates.put(p_strKey, p_State); }
   }
   public void removeState(final String p_strKey)

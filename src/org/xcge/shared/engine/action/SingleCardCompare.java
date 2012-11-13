@@ -1,7 +1,7 @@
 package org.xcge.shared.engine.action;
 
 import java.util.ArrayList;
-import org.xcge.shared.GameState;
+import org.xcge.shared.Table;
 
 import org.xcge.cards.Card;
 
@@ -104,7 +104,7 @@ public class SingleCardCompare implements IAction<SingleCardCompare>
   }
 
   @Override
-  public void doAction(GameState p_oGameState, ActionCriteria p_oAC)
+  public void doAction(Table p_oGameState, ActionCriteria p_oAC)
   {
     ;
   }

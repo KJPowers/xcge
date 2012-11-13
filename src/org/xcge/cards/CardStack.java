@@ -83,7 +83,7 @@ public class CardStack implements Iterable<StatefulCard>
    * Set every card to p_eState
    * @param p_eState
    */
-  public void setState(final CardState p_eState)
+  public void setState(final CardStateEnum p_eState)
   {
     for(StatefulCard oCard : m_colCards)
     {

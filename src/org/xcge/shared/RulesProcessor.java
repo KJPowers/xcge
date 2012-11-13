@@ -16,12 +16,12 @@ public class RulesProcessor
   private Rules m_oParsedRules;
   // The seats (player API)
   private ArrayList<Player> m_alSeats;
-  private final GameState m_oState;
+  private final Table m_oState;
   
   RulesProcessor(final Rules p_oRules)
   {
     m_oParsedRules = p_oRules;
-    m_oState = new GameState();
+    m_oState = new Table();
   }
   
   private void setUpInitialGameState()

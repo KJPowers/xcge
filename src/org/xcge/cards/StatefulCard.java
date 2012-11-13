@@ -1,12 +1,12 @@
 package org.xcge.cards;
 
-import org.xcge.cards.CardState;
+import org.xcge.cards.CardStateEnum;
 
 public class StatefulCard extends BaseCard
 {
-  private CardState m_eState;
+  private CardStateEnum m_eState;
 
-  public StatefulCard(final ISuit p_suit, final IRank p_rank, final CardState p_eState)
+  public StatefulCard(final ISuit p_suit, final IRank p_rank, final CardStateEnum p_eState)
   {
     super(p_suit, p_rank);
     m_eState = p_eState;
@@ -17,7 +17,7 @@ public class StatefulCard extends BaseCard
     this(p_oCard, p_oCard.getState());
   }
   
-  public StatefulCard(final ICard p_iCard, final CardState p_eState)
+  public StatefulCard(final ICard p_iCard, final CardStateEnum p_eState)
   {
     super(p_iCard);
     m_eState = p_eState;
@@ -25,7 +25,7 @@ public class StatefulCard extends BaseCard
 
   public StatefulCard(final ICard p_iCard)
   {
-    this(p_iCard, CardState.FACE_DOWN);
+    this(p_iCard, CardStateEnum.FACE_DOWN);
   }
   
   public void flip()
@@ -33,20 +33,20 @@ public class StatefulCard extends BaseCard
     switch(m_eState)
     {
       case FACE_UP:
-        m_eState = CardState.FACE_DOWN;
+        m_eState = CardStateEnum.FACE_DOWN;
         break;
       default:
-        m_eState = CardState.FACE_UP;
+        m_eState = CardStateEnum.FACE_UP;
         break;
     }
   }
 
-  public CardState getState()
+  public CardStateEnum getState()
   {
     return m_eState;
   }
 
-  public void setState(final CardState p_eState)
+  public void setState(final CardStateEnum p_eState)
   {
     m_eState = p_eState;
   }

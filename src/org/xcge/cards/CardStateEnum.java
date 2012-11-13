@@ -1,6 +1,6 @@
 package org.xcge.cards;
 
-public enum CardState
+public enum CardStateEnum
 {
   FACE_DOWN (true),
   FACE_UP   (true),
@@ -8,7 +8,7 @@ public enum CardState
   
   private final boolean m_bValidInitialState;
   
-  CardState(final boolean p_bValidInitialState)
+  CardStateEnum(final boolean p_bValidInitialState)
   {
     m_bValidInitialState = p_bValidInitialState;
   }

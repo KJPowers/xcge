@@ -1,7 +1,7 @@
 package org.xcge.shared.engine.action;
 
 import org.xcge.cards.CardStack;
-import org.xcge.shared.GameState;
+import org.xcge.shared.Table;
 
 public class MoveCards implements IAction<MoveCards>
 {
@@ -78,7 +78,7 @@ public class MoveCards implements IAction<MoveCards>
   }
 
   @Override
-  public void doAction(GameState p_oGameState, ActionCriteria p_oAC)
+  public void doAction(Table p_oGameState, ActionCriteria p_oAC)
   {
     ;
   }

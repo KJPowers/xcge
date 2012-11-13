@@ -1,8 +1,8 @@
 import org.xcge.cards.CardStack;
 import org.xcge.cards.FrenchDeck;
 import org.xcge.cards.StatefulCard;
-import org.xcge.cards.CardState;
-import org.xcge.shared.GameState;
+import org.xcge.cards.CardStateEnum;
+import org.xcge.shared.Table;
 import org.xcge.shared.engine.action.MoveCards;
 import org.xcge.shared.engine.action.SingleCardCompare;
 
@@ -19,7 +19,7 @@ public class Test
   
   public void war2()
   {
-    GameState oGameState = new GameState(2);
+    Table oGameState = new Table(2);
     oGameState.setNumPlayAreaStacks(2);
     //oGameState.setNumPlayerStacks(0);
     //oGameState.setNumPlayerHandStacks(1);
@@ -29,7 +29,7 @@ public class Test
     CardStack oCards = oDeck.getCardStack();
     oCards.shuffle();
     
-    oGameState.deal(oCards, GameState.DEAL_ALL);
+    oGameState.deal(oCards, Table.DEAL_ALL);
     SingleCardCompare oCompare = new SingleCardCompare(SingleCardCompare.Ranking.ACE_HIGH);
     while(oGameState.getHandCardStack(/* player index */0, /* hand index */0).size() > 0 &&
           oGameState.getHandCardStack(/* player index */1, /* hand index */0).size() > 0)
@@ -65,8 +65,8 @@ public class Test
         // S'ok.  We'll just let this one slide
       }
       // Now turn them face-up
-      oGameState.setState(oGameState.getPlayAreaCardStack(0, 1), CardState.FACE_UP);
-      oGameState.setState(oGameState.getPlayAreaCardStack(1, 1), CardState.FACE_UP);
+      oGameState.setState(oGameState.getPlayAreaCardStack(0, 1), CardStateEnum.FACE_UP);
+      oGameState.setState(oGameState.getPlayAreaCardStack(1, 1), CardStateEnum.FACE_UP);
       
       System.out.print("Comparing " +
                        oGameState.getPlayAreaTopCard(0).toString() +
@@ -81,7 +81,7 @@ public class Test
           // move P2 table stack to P1 table stack
           oGameState.move(all, oGameState.getPlayAreaCardStack(1), top, oGameState.getPlayAreaCardStack(0), top, all_at_once);
           // flip them face down
-          oGameState.setState(oGameState.getPlayAreaCardStack(0), CardState.FACE_DOWN);
+          oGameState.setState(oGameState.getPlayAreaCardStack(0), CardStateEnum.FACE_DOWN);
           // shuffle
           oGameState.shuffle(oGameState.getPlayAreaCardStack(0));
           // print results
@@ -95,7 +95,7 @@ public class Test
           // move P1 table stack to P2 table stack
           oGameState.move(all, oGameState.getPlayAreaCardStack(0), top, oGameState.getPlayAreaCardStack(1), top, all_at_once);
           // flip them face down
-          oGameState.setState(oGameState.getPlayAreaCardStack(1), CardState.FACE_DOWN);
+          oGameState.setState(oGameState.getPlayAreaCardStack(1), CardStateEnum.FACE_DOWN);
           // shuffle
           oGameState.shuffle(oGameState.getPlayAreaCardStack(1));
           // print results
@@ -190,14 +190,14 @@ public class Test
       {
         case P1:
           oP1Cards.putTop(oP2Cards);
-          oP1Cards.setState(CardState.FACE_DOWN);
+          oP1Cards.setState(CardStateEnum.FACE_DOWN);
           oP1Cards.shuffle();
           System.out.println("Player 1 won " + oP1Cards.size() + " cards.");
           oCards1.putBottom(oP1Cards);
           break;
         case P2:
           oP2Cards.putTop(oP1Cards);
-          oP2Cards.setState(CardState.FACE_DOWN);
+          oP2Cards.setState(CardStateEnum.FACE_DOWN);
           oP2Cards.shuffle();
           System.out.println("Player 2 won " + oP2Cards.size() + " cards.");
           oCards2.putBottom(oP2Cards);
@@ -239,7 +239,7 @@ public class Test
     while(p_oCards.size() > 0)
     {
       oCard = p_oCards.takeTop();
-      if(p_bForceFaceUp && oCard.getState() == CardState.FACE_DOWN) oCard.flip();
+      if(p_bForceFaceUp && oCard.getState() == CardStateEnum.FACE_DOWN) oCard.flip();
       System.out.println(oCard.toString());
     }
   }
