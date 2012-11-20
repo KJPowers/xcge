@@ -1,68 +1,42 @@
 package org.xcge.shared;
 
-import java.util.ArrayList;
-//import java.util.Iterator;
+import org.xcge.exceptions.IllegalActionException;
+import org.xcge.shared.engine.action.IAction;
+import org.xcge.shared.engine.rules.GameState;
+import org.xcge.shared.engine.rules.Rules;
+
 
 /**
- * GameTable is the backbone of Ox-C-Gen.  It does the rules processing at its
- * most abstract level, driving all the rest
  * @author Keith Powers
- *
  */
 public class RulesProcessor
 {
-  // The rules processing engine, this contains the rules of the game being played at this table
-    // MVC Role: Controller
-  private Rules m_oParsedRules;
-  // The seats (player API)
-  private ArrayList<Player> m_alSeats;
-  private final Table m_oState;
+  private Rules m_oCurrentRule;
+  private GameState m_oState;
   
-  RulesProcessor(final Rules p_oRules)
+  RulesProcessor()
   {
-    m_oParsedRules = p_oRules;
-    m_oState = new Table();
   }
   
-  private void setUpInitialGameState()
+  public void doAction(final IAction p_oAction) throws IllegalActionException
   {
-//    m_oState.
-  }
-
-  public void begin()
-  {
-    setUpInitialGameState();
-  }
-  
-  public void processRules()
-  {
-  	/*Iterator<Rule> iterRules = m_oRules.iterator();
-	  while(iterRules.hasNext())
-	  {
-      Rule currentStep = iterRules.next();
-      switch(currentStep.getStepType())
-      {
-        case BID:
-          break;
-        case TRICK:
-          break;
-        case DEAL:
-          break;
-        default:
-          break;
-      }
-	  }*/
+    GameState tempState = m_oState.clone();
+    try
+    {
+      
+      m_oCurrentRule = m_oCurrentRule.apply(p_oAction, m_oState);
+    }
+    catch()
   }
   
-  // Getters & setters
-  //public ArrayList <Player> getPlayers() { return m_alPlayers; }  
-  //public Rules getRules() { return m_oRules; }
-  
-  public void setSeats(ArrayList<Player> p_alSeats)
-  { m_alSeats = p_alSeats;
+  public void setRules(final Rules p_oRules)
+  {
+    m_oRules = p_oRules;
   }
   
-  public void setRules(Rules p_oNewRules)
+  public void reset()
   {
-  } 
+    m_oRules.reset();
+    m_oState.initialize(m_oRules);
+  }
 }

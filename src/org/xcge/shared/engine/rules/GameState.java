@@ -1,7 +1,10 @@
-package org.xcge.shared;
+package org.xcge.shared.engine.rules;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.xcge.shared.Seat;
+import org.xcge.shared.engine.CardManager;
 
 
 /**
@@ -13,11 +16,11 @@ import java.util.List;
  * @author Keith Powers - K.J.Powers@gmail.com
  *
  */
-public class GameState
+public class GameState implements Cloneable
 {
   private final List<Seat> m_alSeats;
   private int m_iCurrentPlayerIndex = 0;
-  private CardTracker m_oCardTracker;
+  private CardManager m_oCardManager;
   
   public GameState(final int p_iNumSeats)
   {
