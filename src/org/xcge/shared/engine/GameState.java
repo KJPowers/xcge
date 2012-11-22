@@ -1,10 +1,9 @@
-package org.xcge.shared.engine.rules;
+package org.xcge.shared.engine;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.xcge.shared.Seat;
-import org.xcge.shared.engine.CardManager;
 
 
 /**

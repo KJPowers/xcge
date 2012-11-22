@@ -1,5 +1,6 @@
 package org.xcge.shared.engine.rules;
 
+import org.xcge.shared.engine.GameState;
 import org.xcge.shared.engine.action.IAction;
 
 /**

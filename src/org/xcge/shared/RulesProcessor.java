@@ -1,8 +1,8 @@
 package org.xcge.shared;
 
 import org.xcge.exceptions.IllegalActionException;
+import org.xcge.shared.engine.GameState;
 import org.xcge.shared.engine.action.IAction;
-import org.xcge.shared.engine.rules.GameState;
 import org.xcge.shared.engine.rules.Rules;
 
 
