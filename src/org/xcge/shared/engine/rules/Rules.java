@@ -10,19 +10,23 @@ import org.xcge.shared.engine.action.IAction;
  * This class keeps track of the current step, validates player input, and
  * manipulates the game state.
  * 
+ * Internally, it is a directional graph of {@link IStep} objects  
+ * 
  * @author Keith Powers (K.J.Powers@gmail.com)
  * @see TODO
  */
 class Rules
 {
-  protected int    m_iMinPlayers = -1;
-  protected int    m_iMaxPlayers = -1;
-  protected String m_sName       = "";
+  protected int    m_minNumPlayers = -1;
+  protected int    m_maxNumPlayers = -1;
+  protected String m_gameName      = "";
 
-  private IStep    m_oCurrentStep;
+  private final IStep m_rootStep;
+  private       IStep m_currentStep;
 
   public Rules()
   {
+    m_currentStep = m_rootStep = null;
   }
 
   public void pump(final IAction p_oAction, final GameState p_oState) throws IllegalArgumentException
@@ -31,34 +35,34 @@ class Rules
   }
 
   // Getters
-  public int getMinPlayers()
+  public int getMinNumPlayers()
   {
-    return m_iMinPlayers;
+    return m_minNumPlayers;
   }
 
-  public int getMaxPlayers()
+  public int getMaxNumPlayers()
   {
-    return m_iMaxPlayers;
+    return m_maxNumPlayers;
   }
 
   public String getName()
   {
-    return m_sName;
+    return m_gameName;
   }
 
   // Setters
   public void setMinPlayers(final int p_iMinPlayers)
   {
-    m_iMinPlayers = p_iMinPlayers;
+    m_minNumPlayers = p_iMinPlayers;
   }
 
   public void setMaxPlayers(final int p_iMaxPlayers)
   {
-    m_iMaxPlayers = p_iMaxPlayers;
+    m_maxNumPlayers = p_iMaxPlayers;
   }
 
   public void setName(final String p_sName)
   {
-    m_sName = p_sName;
+    m_gameName = p_sName;
   }
 }

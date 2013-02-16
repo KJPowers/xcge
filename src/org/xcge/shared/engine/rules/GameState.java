@@ -1,10 +1,13 @@
 package org.xcge.shared.engine.rules;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.xcge.shared.Seat;
 import org.xcge.shared.engine.CardManager;
+import org.xcge.shared.engine.Score;
 
 
 /**
@@ -19,12 +22,14 @@ import org.xcge.shared.engine.CardManager;
 public class GameState implements Cloneable
 {
   private final List<Seat> m_alSeats;
+  private final Map<Seat, Score> m_scoresBySeat;
   private int m_iCurrentPlayerIndex = 0;
   private CardManager m_oCardManager;
   
   public GameState(final int p_iNumSeats)
   {
     m_alSeats = new ArrayList<Seat>(p_iNumSeats);
+    m_scoresBySeat = new HashMap<Seat, Score>();
   }
   
   //
