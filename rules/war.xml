@@ -1,22 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <game name="War"
-      minPlayers="2">
+      version="1"
+      xcge_version="1.0"
+      author="Keith Powers">
+  <!-- When NUMSEATS exists and == "n", MINSEATS and MAXSEATS are implied to == "n". -->
+  <table numSeats="2">
+    <!-- STACKs that do not belong to a player are visible to everyone by default. -->
+    <!-- VISIBILITY needs a different name to be clearer.  A value of TRICK tells the engine that all cards are face-up, and it tells the UI to make it clear which card came from which player. -->
+    <stack name="middle"
+           visibility="trick" />
+    <!-- If only one seat, it is implied that all seats are equivalent. -->
+    <seat>
+      <!-- STACKs that belong to a player are visible to everyone by default. -->
+      <!-- NAME is required and the engine treats them in a case-insensitive manner, trimming leading and trailing spaces. -->
+      <!-- VISIBILITY needs a different name to be clearer.  A value of NONE tells the engine that all cards are face-down, so no one can see them. -->
+      <stack name="hand"
+             visibility="none" />
+    </seat>
+  </table>
+  
   <setup>
-    <deck type="standard 52" />
-    <layout />
+    <!-- The deck types are registered by the factory classes included with the engine.  In the default (Java) implementation, this is done by [magic jar lookup stuff that I can't remember the name of right now]. -->
+    <deck type="French"
+          variant="Standard52">
+      <!-- FIRSTDEALER can be ASK or RANDOM or a seat name. -->
+      <!-- NEXTDEALER defaults to CLOCKWISE (CW) but can be COUNTERCLOCKWISE (CCW), ASK, or RANDOM. -->
+      <deal firstDealer="(?:ask|random)"
+            number="all"
+            groupSize="1"
+            toStack="hand" />
+    </deck>
   </setup>
   
-  <hand>
-    <trick startingWith="lastTrickWinner, dealersLeft"
-           numCards="1"
-           face="up">
-      <win condition="">
-        A winrar is you!
-      </win>
-      <tie condition="">
-        <deal />
-      </tie>
-    </trick>
-    <winner condition="" />
-  </hand>
+  <flow>
+    <hand>
+      <trick startingWith="lastTrickWinner, dealersLeft"
+             numCards="1"
+             face="up">
+        <win condition="">
+          A winrar is you!
+        </win>
+        <tie condition="">
+          <deal />
+        </tie>
+      </trick>
+      <winner condition="" />
+    </hand>
+  </flow>
 </game>
+
