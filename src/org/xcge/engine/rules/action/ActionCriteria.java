@@ -1,4 +1,4 @@
-package org.xcge.shared.engine.action;
+package org.xcge.engine.rules.action;
 
 import org.xcge.cards.CardStack;
 

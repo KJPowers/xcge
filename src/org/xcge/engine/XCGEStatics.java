@@ -1,4 +1,4 @@
-package org.xcge.shared;
+package org.xcge.engine;
 
 public class XCGEStatics
 {

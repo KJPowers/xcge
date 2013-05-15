@@ -1,4 +1,4 @@
-package org.xcge.shared.engine.action;
+package org.xcge.engine.rules.action;
 
 
 public interface IAction<E extends IAction<E>>

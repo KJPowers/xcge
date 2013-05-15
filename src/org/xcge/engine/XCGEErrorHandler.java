@@ -1,4 +1,4 @@
-package org.xcge.shared;
+package org.xcge.engine;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;

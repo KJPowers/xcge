@@ -1,5 +1,8 @@
 package org.xcge.engine.rules;
 
+import java.io.File;
+
+import org.xcge.engine.parser.IRulesParser;
 import org.xcge.engine.state.GameState;
 import org.xcge.shared.engine.action.IAction;
 
@@ -24,12 +27,12 @@ public class Rules
   protected int    m_maxNumPlayers = -1;
   protected String m_gameName      = "";
 
-  private final IStep m_rootStep;
-  private       IStep m_currentStep;
+  private IStep m_rootStep;
+  private IStep m_currentStep;
 
-  public Rules()
+  public Rules(final IStep p_oRootStep)
   {
-    m_currentStep = m_rootStep = null;
+    
   }
 
   public void pump(final IAction p_oAction, final GameState p_oState) throws IllegalArgumentException

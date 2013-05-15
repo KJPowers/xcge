@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.xcge.engine.Score;
-import org.xcge.shared.Seat;
+import org.xcge.engine.Seat;
 
 
 /**

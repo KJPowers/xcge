@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.lang.String;
-import org.xcge.shared.XMLRulesParser;
+
+import org.xcge.engine.XMLRulesParser;
 
 public class TestEngine {
   public TestEngine()
