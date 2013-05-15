@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.xcge.cards.CardStack;
 import org.xcge.engine.Score;
 import org.xcge.engine.Seat;
+import org.xcge.engine.StackDescriptor;
 
 
 /**
@@ -33,7 +35,12 @@ public class GameState implements Cloneable
   
   //
   
-//  // Getters / setters
+  // Getters / setters
+  public List<Seat> getSeats() { return m_alSeats; }
+  public CardStack getStack(final StackDescriptor p_oStack)
+  {
+    return m_oCardManager.getStack(p_oStack);
+  }
 //  public Player getCurrentPlayer()
 //  {
 //    return m_alPlayers.get(m_iCurrentPlayerIndex);

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import org.xcge.cards.CardStack;
+import org.xcge.engine.StackDescriptor;
 
 /**
  * Track and move cards
@@ -129,18 +130,18 @@ public class CardTracker
     return p_colStackNames.size();
   }
   
-  public class StackDescriptor
-  {
-    private String m_strSeatName;
-    private String m_strStackName;
-    
-    StackDescriptor(final String p_strSeatName, final String p_strStackName)
-    {
-      m_strSeatName  = p_strSeatName;
-      m_strStackName = p_strStackName;
-    }
-    
-    public String getSeatName()  { return m_strSeatName; }
-    public String getStackName() { return m_strStackName; }
-  }
+//  public class StackDescriptor
+//  {
+//    private String m_strSeatName;
+//    private String m_strStackName;
+//    
+//    StackDescriptor(final String p_strSeatName, final String p_strStackName)
+//    {
+//      m_strSeatName  = p_strSeatName;
+//      m_strStackName = p_strStackName;
+//    }
+//    
+//    public String getSeatName()  { return m_strSeatName; }
+//    public String getStackName() { return m_strStackName; }
+//  }
 }

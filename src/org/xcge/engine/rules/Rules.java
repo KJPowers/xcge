@@ -1,10 +1,7 @@
 package org.xcge.engine.rules;
 
-import java.io.File;
-
-import org.xcge.engine.parser.IRulesParser;
+import org.xcge.engine.rules.action.IAction;
 import org.xcge.engine.state.GameState;
-import org.xcge.shared.engine.action.IAction;
 
 /**
  * The object that gets generated from parsing a rule specification document.

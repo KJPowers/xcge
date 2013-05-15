@@ -1,4 +1,4 @@
-package org.xcge.engine.rules.action;
+package org.xcge.engine.rules;
 //
 //import java.util.Random;
 //

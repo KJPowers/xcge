@@ -1,9 +1,9 @@
 package org.xcge.engine;
 
 import org.xcge.engine.rules.Rules;
+import org.xcge.engine.rules.action.IAction;
 import org.xcge.engine.state.GameState;
 import org.xcge.exceptions.IllegalActionException;
-import org.xcge.shared.engine.action.IAction;
 
 
 /**

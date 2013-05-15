@@ -1,14 +1,14 @@
-package org.xcge.engine.rules.action;
+package org.xcge.engine.rules;
 
 import org.xcge.cards.CardStack;
 
-public class MoveCards implements IAction<MoveCards>
+public class MoveCards //implements IAction<MoveCards>
 {
   // Static class stuff?
   private static MoveCards m_oInstance = null;
   public MoveCards() { m_oInstance = this; }
-  @Override
-  public MoveCards getInstance()
+
+  public static MoveCards getInstance()
   { if(m_oInstance == null) m_oInstance = new MoveCards();
     return m_oInstance;
   }
