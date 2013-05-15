@@ -1,11 +1,7 @@
 package org.xcge.shared;
 
-import org.xcge.shared.XCGEErrorHandler;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.xml.XMLConstants;
@@ -23,9 +19,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
-import org.xcge.shared.Game;
-import org.xcge.shared.XCGEStatics;
 
 public class XMLRulesParser implements Iterator
 {
@@ -52,7 +45,7 @@ public class XMLRulesParser implements Iterator
   private Document m_doc;
   private DocumentBuilderFactory m_dbf;
   private SchemaFactory m_sf;
-  private Game m_oGame;
+//  private Game m_oGame;
   
   public XMLRulesParser()
   {
@@ -76,7 +69,7 @@ public class XMLRulesParser implements Iterator
     {
       Element eleRoot = getBasicGameInfo();
       printTree("", eleRoot);
-      m_oGame = parseXML();
+//      m_oGame = parseXML();
     }
   }    
 
@@ -236,34 +229,34 @@ public class XMLRulesParser implements Iterator
     return eleRoot;
   }
   
-  public Game parseXML()
-  {
-    Game retGame = new Game();
-
-    final Element eleRoot = m_doc.getDocumentElement();
-    //XML Schema can't guarantee a root element value, so make sure it's "GAME" (case insensitive)
-    if(!XCGEStatics.GAME.equals(eleRoot.getNodeName().toUpperCase()))
-    {
-      return null;
-    }
-
-    // First attempt: read attributes for game name
-    NamedNodeMap nnm = eleRoot.getAttributes();
-    for(int i = 0; i < nnm.getLength(); i++)
-    {
-      Node node = nnm.item(i);
-      if(XCGEStatics.NAME.equals(node.getNodeName().toUpperCase()))
-      {
-        retGame.setName(node.getNodeValue());
-      }
-//      if(i > 0) System.out.print(", ");
-//      System.out.print(node.getNodeName() + "=" + node.getNodeValue());
-
-    }    
-    
-
-    return retGame;
-  }
+//  public Game parseXML()
+//  {
+//    Game retGame = new Game();
+//
+//    final Element eleRoot = m_doc.getDocumentElement();
+//    //XML Schema can't guarantee a root element value, so make sure it's "GAME" (case insensitive)
+//    if(!XCGEStatics.GAME.equals(eleRoot.getNodeName().toUpperCase()))
+//    {
+//      return null;
+//    }
+//
+//    // First attempt: read attributes for game name
+//    NamedNodeMap nnm = eleRoot.getAttributes();
+//    for(int i = 0; i < nnm.getLength(); i++)
+//    {
+//      Node node = nnm.item(i);
+//      if(XCGEStatics.NAME.equals(node.getNodeName().toUpperCase()))
+//      {
+//        retGame.setName(node.getNodeValue());
+//      }
+////      if(i > 0) System.out.print(", ");
+////      System.out.print(node.getNodeName() + "=" + node.getNodeValue());
+//
+//    }    
+//    
+//
+//    return retGame;
+//  }
 
   /*public void readRulesFromFileInputStream(final FileInputStream p_FIS)
   {

@@ -1,7 +1,6 @@
 package org.xcge.shared.engine.action;
 
 import org.xcge.cards.CardStack;
-import org.xcge.shared.Table;
 
 public class MoveCards implements IAction<MoveCards>
 {
@@ -77,9 +76,9 @@ public class MoveCards implements IAction<MoveCards>
       p_oGroupTo.putBottom(oCards);
   }
 
-  @Override
-  public void doAction(Table p_oGameState, ActionCriteria p_oAC)
-  {
-    ;
-  }
+//  @Override
+//  public void doAction(Table p_oGameState, ActionCriteria p_oAC)
+//  {
+//    ;
+//  }
 }

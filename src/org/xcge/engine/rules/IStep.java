@@ -1,4 +1,6 @@
-package org.xcge.shared.engine.rules;
+package org.xcge.engine.rules;
+
+import org.xcge.engine.state.GameState;
 
 /**
  * The root of all the rules. Subclasses of this will determine how the step is

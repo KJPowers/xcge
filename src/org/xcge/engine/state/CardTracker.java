@@ -1,4 +1,4 @@
-package org.xcge.shared.engine;
+package org.xcge.engine.state;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -9,7 +9,7 @@ import org.xcge.cards.CardStack;
  * Track and move cards
  * @author Keith Powers (K.J.Powers@gmail.com)
  */
-public class CardManager
+public class CardTracker
 {
   public static final String TABLE = "Table";
   
@@ -24,7 +24,7 @@ public class CardManager
    * @param p_colSeatNames
    * @param p_colSeatStackNames
    */
-  public CardManager(final Set<String> p_colTableStackNames,
+  public CardTracker(final Set<String> p_colTableStackNames,
                      final Set<String> p_colSeatNames,
                      final Set<String> p_colSeatStackNames)
   {

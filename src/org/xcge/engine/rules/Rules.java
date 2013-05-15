@@ -1,6 +1,6 @@
-package org.xcge.shared.engine.rules;
+package org.xcge.engine.rules;
 
-import org.xcge.shared.engine.GameState;
+import org.xcge.engine.state.GameState;
 import org.xcge.shared.engine.action.IAction;
 
 /**
@@ -9,14 +9,16 @@ import org.xcge.shared.engine.action.IAction;
  * factory).
  * 
  * This class keeps track of the current step, validates player input, and
- * manipulates the game state.
+ * manipulates the game state. It DOES NOT, however, store state - that is done
+ * in {@link GameState}, which you will see passed around in the methods in this
+ * class.
  * 
- * Internally, it is a directional graph of {@link IStep} objects  
+ * Internally, it is a directional graph of {@link IStep} objects
  * 
  * @author Keith Powers (K.J.Powers@gmail.com)
  * @see TODO
  */
-class Rules
+public class Rules
 {
   protected int    m_minNumPlayers = -1;
   protected int    m_maxNumPlayers = -1;
