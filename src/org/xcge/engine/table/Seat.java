@@ -1,4 +1,4 @@
-package org.xcge.engine;
+package org.xcge.engine.table;
 
 import org.xcge.cards.CardStack;
 

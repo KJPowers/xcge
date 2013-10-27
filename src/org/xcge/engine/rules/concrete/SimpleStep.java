@@ -1,4 +1,6 @@
-package org.xcge.engine.rules;
+package org.xcge.engine.rules.concrete;
+
+import org.xcge.engine.rules.IStep;
 
 
 /**

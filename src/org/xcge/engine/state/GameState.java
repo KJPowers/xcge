@@ -7,8 +7,7 @@ import java.util.Map;
 
 import org.xcge.cards.CardStack;
 import org.xcge.engine.Score;
-import org.xcge.engine.Seat;
-import org.xcge.engine.StackDescriptor;
+import org.xcge.engine.table.Seat;
 
 
 /**

@@ -1,4 +1,4 @@
-package org.xcge.engine;
+package org.xcge.engine.state;
 
 import java.io.Serializable;
 

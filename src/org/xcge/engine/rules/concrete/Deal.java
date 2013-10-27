@@ -1,9 +1,10 @@
-package org.xcge.engine.rules;
+package org.xcge.engine.rules.concrete;
 
 import org.xcge.cards.CardStack;
-import org.xcge.engine.Seat;
-import org.xcge.engine.StackDescriptor;
+import org.xcge.engine.rules.IStep;
 import org.xcge.engine.state.GameState;
+import org.xcge.engine.state.StackDescriptor;
+import org.xcge.engine.table.Seat;
 
 public class Deal extends SimpleStep
 {

@@ -11,7 +11,7 @@ import org.xcge.exceptions.IllegalActionException;
  */
 public class RulesProcessor
 {
-  private Rules m_oRules;
+  private RulesProcessor m_oRules;
   private GameState m_oState;
   
   RulesProcessor()

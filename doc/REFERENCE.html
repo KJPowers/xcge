@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h1>Software design concepts OR,<br/>
+      Things you should know if you are going to write code for xcge OR,<br/>
+      Things I keep forgetting</h1>
+
+    <h2>Card tracking and game state:</h2><br/>
+    <div>To strike a balance between real-life concepts and digital implementation, xcge makes a number of abstractions.  The main concept is that games are played at tables, much like in a casino.  This concept is simplified by assuming that all cards exist only in stacks on the table, but that each seat has its own area in which to put card stacks.  There also exist rules that determine which players can see which stacks, and when.</div>
+
+    <h2>Glossary of terms:</h2>
+    <ul>
+      <li>
+        <h3>GAME:</h3>
+        <div>The process of stepping through a set of RULES where the PLAYERS manipulate cards (within the bounds of the RULES) to try to win.</div>
+        <div>GAMEs are distinct from RULES in the same way that running programs are distinct from source code.</div>
+      </li>
+
+      <li>
+        <h3>PLAYER:</h3>
+        <div>A participant in a GAME who manipulates cards to try to win.  PLAYERS need not be human, they can be other programs or AIs.</div>
+      </li>
+
+      <li>
+        <h3>RULES:</h3>
+        <div>The set of steps iterated through to play a GAME.  RULES are invariant while a GAME is in progress, and simply define the way a GAME may be played.</div>
+      </li>
+
+      <li>
+        <h3>SEAT:</h3>
+        <div>A place at a TABLE for PLAYERS to sit and play the TABLE's GAME.  Each SEAT can only have one PLAYER at a time</div>
+      </li>
+
+      <li>
+        <h3>TABLE:</h3>
+        <div>A place for PLAYERS to gather to play a GAME.  A TABLE can only have one set of RULES at a time, (/* TODO: evaluate whether this happens at this layer or the next */ but when a GAME is not in progress, the RULES may be changed).</div>
+        <div>Depending on the RULES, there could be one or more SEATS - but there can be a maximum of one PLAYER per SEAT.</div>
+        <div>The GAME's RULES also determine the STACKS each seat has, and the VISIBILITY for these stacks throughout the GAME.</div>
+      </li>
+    </ul>
+  </body>
+</html>

@@ -12,7 +12,7 @@ import org.xcge.engine.state.GameState;
 public interface IStep
 {
   /**
-   * Do some action and tell the {@link RulesProcessor} which step to process next.
+   * Do some action and tell the {@link Rules} which step to process next.
    * @param p_gameState The game's state
    * @return The next step to process
    */

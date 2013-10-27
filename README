@@ -14,10 +14,10 @@ Design goals:
   - Points are not always good to get.
   - There may be multiple ways to win.
   - Jacks may beat Aces, 4s and 6s - but not 5s.
-  - Team-based games are fun and should be accomodated.
+  - Team-based games are fun and should be accommodated.
   - Card visibility may have complex rules (ie: Indian poker - everyone ELSE can see your card, but you cannot; Golf - Only you can see your cards, but only once per hand).
 - Ease of writing rules documents*:
-  - There should be as few concepts  as possible that non-programmers can have trouble grasping (for loops, inheritence, variable scoping). Common tasks should be easy, and difficult tasks should be possible (thanks for that criterion, Larry Wall!)
+  - There should be as few concepts as possible that non-programmers can have trouble grasping (for loops, inheritence, variable scoping). Common tasks should be easy, and difficult tasks should be possible (thanks for that criterion, Larry Wall!)
   - The rules should be readable: XML is easy for machines and has great schema validators, but can be very cumbersome to write by hand. YAML looks more natural but doesn't validate as easily.
 - The source code should remain maintainable.
 - More?

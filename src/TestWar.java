@@ -3,15 +3,15 @@ import java.io.File;
 import org.xcge.cards.CardStack;
 import org.xcge.cards.CardStateEnum;
 import org.xcge.cards.StatefulCard;
-import org.xcge.engine.StackDescriptor;
 import org.xcge.engine.parser.IRulesParser;
-import org.xcge.engine.rules.Deal;
 import org.xcge.engine.rules.IStep;
-import org.xcge.engine.rules.Loop;
 import org.xcge.engine.rules.Rules;
 import org.xcge.engine.rules.RulesBuilder;
-import org.xcge.engine.rules.SimpleStep;
+import org.xcge.engine.rules.concrete.Deal;
+import org.xcge.engine.rules.concrete.Loop;
+import org.xcge.engine.rules.concrete.SimpleStep;
 import org.xcge.engine.state.CardTracker;
+import org.xcge.engine.state.StackDescriptor;
 
 public class TestWar 
 {
@@ -159,8 +159,8 @@ public class TestWar
     final SimpleStep oRootStep;
     oRootStep = new Deal(new StackDescriptor(CardTracker.TABLE, "Deck"), Deal.ALL, "Hand");
     final IStep oNextStep;
-    oNextStep = new Loop();
-    RulesBuilder.setNextStep(oRootStep, oNextStep);
+//    oNextStep = new Loop();
+//    RulesBuilder.setNextStep(oRootStep, oNextStep);
 //    oRootStep.
     
     final Rules oWarRules = new Rules(oRootStep);
