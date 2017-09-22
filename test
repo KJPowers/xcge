@@ -2,4 +2,3 @@
 ant
 echo -e "\n"
 java -jar dist/bin/xcge.jar schema/po.xsd rules/po.xml
-
